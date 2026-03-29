@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataMagic - From Raw Data to Narrative Data Videos</title>
+    <title>DataMagic - VLDB 2026 Demo</title>
     <style>
         * {
             margin: 0;
@@ -12,307 +12,215 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            background: #fff;
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #333;
+            background: #fafafa;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Header */
+        .header {
+            background: #2c3e50;
             color: white;
-            padding: 8rem 2rem 6rem;
+            padding: 3rem 2rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            border-bottom: 3px solid #34495e;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
+        .header .subtitle {
+            font-size: 1.2rem;
             margin-bottom: 1rem;
-            opacity: 0.95;
-            font-weight: 400;
+            font-style: italic;
+            opacity: 0.9;
         }
 
-        .hero .conference {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: rgba(255,255,255,0.15);
-            border-radius: 50px;
+        .header .conference {
             font-size: 0.95rem;
-            margin-top: 1rem;
-            backdrop-filter: blur(10px);
+            background: #34495e;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
         }
 
         /* Container */
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .wide-container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
         /* Section */
         .section {
-            padding: 5rem 0;
+            padding: 3rem 0;
+            border-bottom: 1px solid #ddd;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
+        .section:last-child {
+            border-bottom: none;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            font-size: 1.2rem;
-            color: #718096;
-            max-width: 700px;
-            margin: 0 auto;
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            font-weight: normal;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
 
         .section p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.8;
-            color: #4a5568;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section strong {
+            color: #2c3e50;
+            font-weight: bold;
         }
 
         /* Video Section */
-        .video-section {
-            background: #f7fafc;
-            padding: 5rem 0;
-        }
-
-        .video-wrapper {
+        .video-container {
             background: white;
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            margin: 3rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 2rem;
+            margin: 2rem 0;
         }
 
         .video-placeholder {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            border-radius: 12px;
-            padding: 8rem 2rem;
+            background: #f8f9fa;
+            border: 2px dashed #bdc3c7;
+            padding: 4rem 2rem;
             text-align: center;
-            color: #94a3b8;
-            font-size: 1.1rem;
-            position: relative;
-            border: 2px dashed #cbd5e0;
-        }
-
-        .video-placeholder::before {
-            content: '▶';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            color: #cbd5e0;
-        }
-
-        /* Buttons */
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
+            color: #7f8c8d;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            border-radius: 4px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Links */
+        .links {
+            margin: 2rem 0;
+        }
+
+        .link {
+            display: inline-block;
+            margin: 0.5rem 1rem 0.5rem 0;
+            padding: 0.6rem 1.2rem;
+            background: #3498db;
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        .link:hover {
+            background: #2980b9;
         }
 
-        .btn-secondary {
+        .link.secondary {
             background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
+            color: #3498db;
+            border: 1px solid #3498db;
         }
 
-        .btn-secondary:hover {
-            background: #f7fafc;
+        .link.secondary:hover {
+            background: #ecf0f1;
         }
 
         /* Features */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .features {
+            margin: 2rem 0;
         }
 
-        .feature-card {
+        .feature {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
             background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-            border-top: 4px solid #667eea;
+            border: 1px solid #ddd;
+            border-left: 4px solid #3498db;
         }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        .feature h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            font-weight: bold;
         }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #1a202c;
-        }
-
-        .feature-card p {
-            font-size: 1rem;
-            color: #718096;
-            line-height: 1.7;
+        .feature p {
+            font-size: 0.95rem;
             margin: 0;
+            color: #555;
         }
 
         /* Screenshots */
-        .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
+        .screenshots {
+            margin: 2rem 0;
         }
 
-        .screenshot-card {
+        .screenshot {
+            margin-bottom: 2rem;
             background: white;
-            border-radius: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .screenshot-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
         }
 
         .screenshot-img {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            height: 220px;
+            background: #f8f9fa;
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #a0aec0;
-            font-size: 1rem;
-            border-bottom: 1px solid #e2e8f0;
+            color: #95a5a6;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #ddd;
         }
 
         .screenshot-caption {
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .screenshot-caption h4 {
-            color: #667eea;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 0.5rem;
+            color: #2c3e50;
         }
 
         .screenshot-caption p {
-            font-size: 0.95rem;
-            color: #718096;
+            font-size: 0.9rem;
+            color: #666;
             margin: 0;
         }
 
         /* Architecture */
-        .architecture-section {
-            background: #1a202c;
-            color: white;
-            padding: 5rem 0;
-        }
-
-        .architecture-section .section-header h2 {
-            color: white;
-        }
-
-        .architecture-section .section-header p {
-            color: #cbd5e0;
-        }
-
-        .arch-diagram {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 3rem;
-            margin: 3rem 0;
-            border: 1px solid rgba(255,255,255,0.1);
+        .arch-container {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 4px;
         }
 
         .arch-flow {
             text-align: center;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #e2e8f0;
-            padding: 2rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            margin-bottom: 3rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #ecf0f1;
+            border-radius: 4px;
+            font-size: 0.95rem;
         }
 
         .arch-stages {
@@ -322,220 +230,168 @@
         }
 
         .arch-stage {
-            background: rgba(255,255,255,0.08);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            border-radius: 4px;
         }
 
         .arch-stage h3 {
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-bottom: 1rem;
-            color: #fff;
+            color: #2c3e50;
+            font-weight: bold;
         }
 
         .arch-stage ul {
-            list-style: none;
-            padding: 0;
+            list-style-type: disc;
+            padding-left: 1.5rem;
         }
 
         .arch-stage li {
-            padding: 0.5rem 0;
-            color: #cbd5e0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .arch-stage li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #555;
         }
 
         /* Stats */
-        .stats-section {
-            background: #f7fafc;
-            padding: 5rem 0;
-        }
-
-        .stats-grid {
+        .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
-        .stat-card {
+        .stat {
             background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+            border-radius: 4px;
         }
 
         .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
             margin-bottom: 0.5rem;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: #718096;
+            font-size: 0.85rem;
+            color: #666;
         }
 
         /* Code Block */
-        .code-section {
-            padding: 5rem 0;
-        }
-
         .code-block {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 2rem;
-            border-radius: 12px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 4px;
             overflow-x: auto;
-            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin: 2rem 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            border: 1px solid #34495e;
         }
 
         /* Scenarios */
-        .scenarios-section {
-            background: #f7fafc;
-            padding: 5rem 0;
-        }
-
-        .scenario-card {
-            background: white;
-            border-radius: 12px;
-            padding: 3rem;
+        .scenario {
             margin: 2rem 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
+            padding: 2rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
 
-        .scenario-card:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        .scenario h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-weight: bold;
         }
 
-        .scenario-card h3 {
-            font-size: 1.8rem;
-            color: #667eea;
-            margin-bottom: 1.5rem;
-        }
-
-        .scenario-card p {
-            font-size: 1.05rem;
-            color: #4a5568;
-            line-height: 1.8;
+        .scenario p {
             margin-bottom: 1rem;
         }
 
-        .scenario-card ul {
-            list-style: none;
-            padding: 0;
+        .scenario ul {
+            list-style-type: disc;
+            padding-left: 2rem;
             margin-top: 1rem;
         }
 
-        .scenario-card li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
-            color: #4a5568;
-        }
-
-        .scenario-card li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
+        .scenario li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
         }
 
         /* Info Box */
         .info-box {
-            background: linear-gradient(135deg, #ebf4ff 0%, #e0e7ff 100%);
-            border-left: 4px solid #667eea;
-            padding: 2rem;
-            border-radius: 8px;
+            background: #e8f4f8;
+            border: 1px solid #bee5eb;
+            border-left: 4px solid #17a2b8;
+            padding: 1.5rem;
             margin: 2rem 0;
+            border-radius: 4px;
         }
 
         .info-box p {
-            color: #2d3748;
             margin: 0.5rem 0;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            color: #0c5460;
         }
 
         /* Footer */
         .footer {
-            background: #1a202c;
+            background: #2c3e50;
             color: white;
-            padding: 4rem 2rem;
+            padding: 2rem;
             text-align: center;
+            margin-top: 3rem;
         }
 
         .footer p {
-            color: #cbd5e0;
             margin: 0.5rem 0;
+            font-size: 0.9rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .section-header h2 {
+            .header h1 {
                 font-size: 2rem;
             }
-
+            
             .arch-stages {
                 grid-template-columns: 1fr;
             }
 
-            .features-grid,
-            .screenshots-grid,
-            .stats-grid {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero -->
-    <div class="hero">
-        <div class="hero-content">
-            <h1>DataMagic</h1>
-            <p class="subtitle">From Raw Data to Narrative Data Videos</p>
-            <p class="conference">VLDB 2026 Demo Submission</p>
-        </div>
+    <!-- Header -->
+    <div class="header">
+        <h1>DataMagic</h1>
+        <p class="subtitle">From Raw Data to Narrative Data Videos</p>
+        <p class="conference">VLDB 2026 Demo Submission</p>
     </div>
 
-    <!-- Abstract -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Abstract</h2>
-            </div>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Abstract -->
+        <section class="section">
+            <h2>Abstract</h2>
             <p>
                 Data videos integrate dynamic charts, voiceover narration, and synchronized animations to convey data insights 
                 through temporal storytelling. However, creating high-quality data videos requires expertise across data analysis, 
@@ -549,116 +405,91 @@
                 ensuring traceability. It employs a <strong>Generate-then-Orchestrate</strong> multi-agent architecture that generates 
                 candidate scenes in parallel before optimizing global narrative coherence.
             </p>
-        </div>
-    </section>
+        </section>
 
-    <!-- Demo Video -->
-    <section class="video-section">
-        <div class="wide-container">
-            <div class="section-header">
-                <h2>Demo Video</h2>
-                <p>Watch a 5-minute walkthrough of the DataMagic system</p>
-            </div>
-            <div class="video-wrapper">
+        <!-- Demo Video -->
+        <section class="section">
+            <h2>Demo Video</h2>
+            <div class="video-container">
                 <div class="video-placeholder">
-                    <div style="position: relative; z-index: 1;">
-                        [Demo Video Placeholder]<br>
-                        <small style="color: #94a3b8;">Video will be embedded here (YouTube/Vimeo)</small>
-                    </div>
+                    [Demo Video Placeholder - 5-minute system walkthrough]<br>
+                    <small>Video will be embedded here (YouTube/Vimeo)</small>
                 </div>
             </div>
-            <div class="button-group">
-                <a href="#" class="btn btn-primary">📹 Watch on YouTube</a>
-                <a href="#" class="btn btn-primary">💻 Try Live Demo</a>
-                <a href="#" class="btn btn-secondary">📄 Download Paper</a>
-                <a href="#" class="btn btn-secondary">📊 Supplementary Materials</a>
+            <div class="links">
+                <a href="#" class="link">📹 Watch on YouTube</a>
+                <a href="#" class="link">💻 Try Live Demo</a>
+                <a href="#" class="link secondary">📄 Download Paper (PDF)</a>
+                <a href="#" class="link secondary">📊 Supplementary Materials</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Key Features -->
-    <section class="section">
-        <div class="wide-container">
-            <div class="section-header">
-                <h2>Key Features</h2>
-                <p>What makes DataMagic unique</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">🎯</span>
-                    <h3>Data Fidelity</h3>
+        <!-- Key Features -->
+        <section class="section">
+            <h2>Key Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>🎯 Data Fidelity</h3>
                     <p>DVSpec's semantic references ensure every visual element traces back to source data, eliminating numerical hallucinations.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🤖</span>
-                    <h3>Multi-Agent Pipeline</h3>
+                <div class="feature">
+                    <h3>🤖 Multi-Agent Pipeline</h3>
                     <p>Generate-then-Orchestrate: parallel scene generation followed by global narrative optimization.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">✏️</span>
-                    <h3>Interactive Editing</h3>
+                <div class="feature">
+                    <h3>✏️ Interactive Editing</h3>
                     <p>Three modes: canvas manipulation, script editing, and natural language commands with auto-sync.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">💬</span>
-                    <h3>Data Q&A</h3>
+                <div class="feature">
+                    <h3>💬 Data Q&A</h3>
                     <p>Structured provenance enables precise queries on video content, converting videos into explorable interfaces.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🎬</span>
-                    <h3>Audio-Visual Sync</h3>
+                <div class="feature">
+                    <h3>🎬 Audio-Visual Sync</h3>
                     <p>Narration-indexed triggers maintain animation sync even when text changes.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🚀</span>
-                    <h3>End-to-End</h3>
+                <div class="feature">
+                    <h3>🚀 End-to-End</h3>
                     <p>From CSV upload to final video: automated data processing, visualization, and narrative composition.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- System Interface -->
-    <section class="section">
-        <div class="wide-container">
-            <div class="section-header">
-                <h2>System Interface</h2>
-                <p>Three interactive demonstration scenarios</p>
-            </div>
-            <div class="screenshots-grid">
-                <div class="screenshot-card">
+        <!-- System Screenshots -->
+        <section class="section">
+            <h2>System Interface</h2>
+            <div class="screenshots">
+                <div class="screenshot">
                     <div class="screenshot-img">[Screenshot 1]</div>
                     <div class="screenshot-caption">
                         <h4>Scenario 1: Automated Generation</h4>
-                        <p>Upload CSV data and natural language query to generate complete narrative videos automatically</p>
+                        <p>Automated video generation from CSV data and natural language query</p>
                     </div>
                 </div>
-                <div class="screenshot-card">
+                <div class="screenshot">
                     <div class="screenshot-img">[Screenshot 2]</div>
                     <div class="screenshot-caption">
                         <h4>Scenario 2: Multi-Modal Editing</h4>
-                        <p>Refine videos through canvas manipulation, script editing, or natural language commands</p>
+                        <p>Multi-modal editing interface with canvas, script, and chat modes</p>
                     </div>
                 </div>
-                <div class="screenshot-card">
+                <div class="screenshot">
                     <div class="screenshot-img">[Screenshot 3]</div>
                     <div class="screenshot-caption">
                         <h4>Scenario 3: Data Q&A</h4>
-                        <p>Ask questions about video content and convert insights into new scenes</p>
+                        <p>Data Q&A interface with provenance-based answers</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Architecture -->
-    <section class="architecture-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>System Architecture</h2>
-                <p>Two-stage Generate-then-Orchestrate pipeline</p>
-            </div>
-            <div class="arch-diagram">
+        <!-- Architecture -->
+        <section class="section">
+            <h2>System Architecture</h2>
+            <p>
+                DataMagic employs a two-stage <strong>Generate-then-Orchestrate</strong> architecture:
+            </p>
+            <div class="arch-container">
                 <div class="arch-flow">
                     Input (CSV + Query) → Stage 1: Candidate Generation → DVSpec → Stage 2: Global Orchestration → Output Video
                 </div>
@@ -681,16 +512,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <p>
+                <strong>DVSpec</strong> serves as the declarative intermediate representation, decoupling logical description from 
+                rendering implementation. It enables data-driven semantic references and narration-indexed animation triggers.
+            </p>
+        </section>
 
-    <!-- DVSpec Example -->
-    <section class="code-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>DVSpec Example</h2>
-                <p>Declarative specification with semantic references and narration-indexed triggers</p>
-            </div>
+        <!-- DVSpec Example -->
+        <section class="section">
+            <h2>DVSpec Example</h2>
+            <p>Sample scene specification showing semantic references and narration-indexed triggers:</p>
             <div class="code-block">{
   "type": "chart",
   "content": {
@@ -709,53 +540,44 @@
     }
   ]
 }</div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Evaluation Results -->
-    <section class="stats-section">
-        <div class="wide-container">
-            <div class="section-header">
-                <h2>Evaluation Results</h2>
-                <p>Validated on 109 real-world samples from DAComp-DA and T2R-bench</p>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
+        <!-- Evaluation -->
+        <section class="section">
+            <h2>Evaluation Results</h2>
+            <p>
+                Quantitative evaluation on 109 real-world samples from DAComp-DA and T2R-bench datasets:
+            </p>
+            <div class="stats">
+                <div class="stat">
                     <div class="stat-number">109</div>
                     <div class="stat-label">Real Samples</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat">
                     <div class="stat-number">3.89</div>
                     <div class="stat-label">Avg Score (out of 5)</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat">
                     <div class="stat-number">+75%</div>
                     <div class="stat-label">vs Baselines</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat">
                     <div class="stat-number">95%+</div>
                     <div class="stat-label">Success Rate</div>
                 </div>
             </div>
-            <div class="container">
-                <div class="info-box">
-                    <p><strong>Baselines:</strong> DeepSeek-V3.2, Gemini-2.5-Pro, GPT-5, Claude-Sonnet-4 (single-pass generation)</p>
-                    <p><strong>Metrics:</strong> Intent Fulfillment, Data Insights, Narrative Quality, Animation Effectiveness, Aesthetic Quality</p>
-                    <p><strong>Validation:</strong> Automated scoring validated with human expert ratings (Pearson r=0.91)</p>
-                </div>
+            <div class="info-box">
+                <p><strong>Baselines:</strong> DeepSeek-V3.2, Gemini-2.5-Pro, GPT-5, Claude-Sonnet-4 (single-pass generation)</p>
+                <p><strong>Metrics:</strong> Intent Fulfillment, Data Insights, Narrative Quality, Animation Effectiveness, Aesthetic Quality</p>
+                <p><strong>Validation:</strong> Automated scoring validated with human expert ratings (Pearson r=0.91)</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Demo Scenarios -->
-    <section class="scenarios-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Interactive Demo Scenarios</h2>
-                <p>Experience DataMagic through three progressive demonstrations</p>
-            </div>
+        <!-- Demo Scenarios -->
+        <section class="section">
+            <h2>Interactive Demo Scenarios</h2>
             
-            <div class="scenario-card">
+            <div class="scenario">
                 <h3>Scenario 1: Automated Generation</h3>
                 <p>
                     Upload a CSV file (e.g., tech company financial data) and input a natural language query like 
@@ -765,9 +587,11 @@
                 </p>
             </div>
 
-            <div class="scenario-card">
+            <div class="scenario">
                 <h3>Scenario 2: Multi-Modal Editing</h3>
-                <p>Refine generated videos through three interaction modes:</p>
+                <p>
+                    Refine generated videos through three interaction modes:
+                </p>
                 <ul>
                     <li><strong>Canvas Manipulation:</strong> Click charts to switch types, adjust mappings, or modify colors</li>
                     <li><strong>Script Editing:</strong> Edit narration text—animations auto-sync to new timing</li>
@@ -775,7 +599,7 @@
                 </ul>
             </div>
 
-            <div class="scenario-card">
+            <div class="scenario">
                 <h3>Scenario 3: Data Q&A</h3>
                 <p>
                     Ask questions about the video: "Which product has the highest growth rate?" DVSpec's structured provenance 
@@ -783,30 +607,26 @@
                     into new video scenes: "Add a scene for regional sales distribution."
                 </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Resources -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Resources</h2>
+        <!-- Resources -->
+        <section class="section">
+            <h2>Resources</h2>
+            <div class="links">
+                <a href="#" class="link">📄 Paper (PDF)</a>
+                <a href="#" class="link">📹 Demo Video</a>
+                <a href="#" class="link">💻 Live Demo</a>
+                <a href="#" class="link">📊 Supplementary Materials</a>
+                <a href="#" class="link secondary">🔗 GitHub (Coming Soon)</a>
             </div>
-            <div class="button-group">
-                <a href="#" class="btn btn-primary">📄 Paper (PDF)</a>
-                <a href="#" class="btn btn-primary">📹 Demo Video</a>
-                <a href="#" class="btn btn-primary">💻 Live Demo</a>
-                <a href="#" class="btn btn-secondary">📊 Supplementary Materials</a>
-                <a href="#" class="btn btn-secondary">🔗 GitHub (Coming Soon)</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- Footer -->
     <div class="footer">
-        <p style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;">DataMagic: From Raw Data to Narrative Data Videos</p>
+        <p><strong>DataMagic: From Raw Data to Narrative Data Videos</strong></p>
         <p>VLDB 2026 Demo Submission</p>
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
+        <p style="margin-top: 1rem;">
             For questions or collaboration inquiries, please contact: [contact info placeholder]
         </p>
     </div>
