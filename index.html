@@ -12,173 +12,104 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             line-height: 1.7;
-            color: #e2e8f0;
-            background: #0a0e27;
-            overflow-x: hidden;
+            color: #1e293b;
+            background: #ffffff;
         }
 
-        /* Static background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
-        }
-
+        /* Header */
         .header {
-            position: relative;
-            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            color: white;
+            padding: 5rem 2rem 4rem;
             text-align: center;
-            overflow: hidden;
+            position: relative;
         }
 
-        .header::before {
+        .header::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
         }
 
         .header h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             letter-spacing: -0.02em;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5)); }
-            50% { filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.7)); }
         }
 
         .header .subtitle {
             font-size: 1.4rem;
-            color: #cbd5e0;
-            margin-bottom: 2rem;
-            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            font-weight: 400;
         }
 
         .header .conference {
             font-size: 1rem;
-            color: #94a3b8;
+            opacity: 0.9;
             padding: 0.5rem 1.5rem;
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(255,255,255,0.3);
             border-radius: 50px;
             display: inline-block;
-            background: rgba(99, 102, 241, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.1);
         }
 
+        /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 2rem;
-            position: relative;
         }
 
+        /* Section */
         .section {
-            padding: 5rem 0;
-            position: relative;
+            padding: 4rem 0;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
-        }
-
-        .section:first-child::before {
-            display: none;
+        .section:last-child {
+            border-bottom: none;
         }
 
         .section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #f1f5f9;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
             font-weight: 700;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa);
-            border-radius: 2px;
         }
 
         .section p {
             font-size: 1.05rem;
-            line-height: 1.9;
-            color: #cbd5e0;
+            line-height: 1.8;
+            color: #475569;
             margin-bottom: 1rem;
-        }
-
-        /* Glass morphism cards */
-        .glass-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover {
-            background: rgba(30, 41, 59, 0.7);
-            border-color: rgba(99, 102, 241, 0.4);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
         }
 
         /* Video Section */
         .video-container {
-            margin: 3rem 0;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #e2e8f0;
         }
 
         .video-placeholder {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.8) 100%);
-            border: 2px dashed rgba(99, 102, 241, 0.4);
-            border-radius: 16px;
-            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            padding: 5rem 2rem;
             text-align: center;
-            color: #94a3b8;
+            color: #64748b;
             font-size: 1.1rem;
             position: relative;
-            overflow: hidden;
         }
 
         .video-placeholder::before {
@@ -187,17 +118,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 4rem;
-            color: rgba(99, 102, 241, 0.3);
-            animation: pulse 2s ease-in-out infinite;
+            font-size: 3rem;
+            color: #94a3b8;
+            opacity: 0.5;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
-        /* Links */
+        /* Buttons */
         .links {
             display: flex;
             gap: 1rem;
@@ -209,46 +135,30 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+            padding: 0.875rem 1.75rem;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
-            transition: all 0.3s;
-            border: 1px solid rgba(99, 102, 241, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .link-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .link-btn:hover::before {
-            left: 100%;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
         }
 
         .link-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
         .link-btn.secondary {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: white;
+            color: #6366f1;
+            border: 2px solid #6366f1;
+            box-shadow: none;
         }
 
         .link-btn.secondary:hover {
-            background: rgba(30, 41, 59, 0.8);
-            border-color: rgba(99, 102, 241, 0.5);
+            background: #f8fafc;
         }
 
         /* Features Grid */
@@ -256,48 +166,26 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .feature {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
+            background: #f8fafc;
             padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-left: 4px solid;
-            border-image: linear-gradient(180deg, #60a5fa, #a78bfa) 1;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .feature:hover::before {
-            opacity: 1;
+            border-radius: 12px;
+            border-left: 4px solid #6366f1;
+            transition: all 0.2s ease;
         }
 
         .feature:hover {
-            transform: translateY(-5px);
-            border-color: rgba(99, 102, 241, 0.5);
-            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
         }
 
         .feature h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #f1f5f9;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -305,9 +193,9 @@
 
         .feature p {
             font-size: 0.95rem;
-            color: #cbd5e0;
+            color: #64748b;
             margin: 0;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         /* Screenshots */
@@ -315,49 +203,41 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .screenshot {
-            background: rgba(30, 41, 59, 0.4);
-            border-radius: 16px;
+            background: white;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
         }
 
         .screenshot:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.5);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
         }
 
         .screenshot-img {
-            background: linear-gradient(135deg, rgba(51, 65, 85, 0.8), rgba(71, 85, 105, 0.8));
-            height: 220px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #64748b;
+            color: #94a3b8;
             font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .screenshot-img::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(0deg, rgba(99, 102, 241, 0.03) 0px, rgba(99, 102, 241, 0.03) 1px, transparent 1px, transparent 2px),
-                repeating-linear-gradient(90deg, rgba(99, 102, 241, 0.03) 0px, rgba(99, 102, 241, 0.03) 1px, transparent 1px, transparent 2px);
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .screenshot-caption {
-            padding: 1.5rem;
+            padding: 1.25rem;
             font-size: 0.95rem;
-            color: #cbd5e0;
+            color: #475569;
+        }
+
+        .screenshot-caption strong {
+            color: #6366f1;
         }
 
         /* Stats */
@@ -365,101 +245,53 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .stat {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             padding: 2rem;
-            border-radius: 16px;
+            border-radius: 12px;
             text-align: center;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa, #ec4899);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .stat:hover::before {
-            transform: scaleX(1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
         }
 
         .stat:hover {
-            transform: translateY(-5px);
-            border-color: rgba(99, 102, 241, 0.5);
-            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.15);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #6366f1;
             margin-bottom: 0.5rem;
         }
 
         .stat-label {
             font-size: 0.95rem;
-            color: #94a3b8;
-        }
-
-        /* Code Block */
-        .code-block {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #e2e8f0;
-            padding: 2rem;
-            border-radius: 16px;
-            overflow-x: auto;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.8;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .code-block::before {
-            content: 'DVSpec';
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 0.75rem;
             color: #64748b;
-            background: rgba(99, 102, 241, 0.2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
         }
 
-        /* Architecture Box */
+        /* Architecture */
         .arch-container {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
-            padding: 3rem 2rem;
-            border-radius: 16px;
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 12px;
             margin: 2rem 0;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            border: 1px solid #e2e8f0;
         }
 
         .arch-flow {
             text-align: center;
             font-weight: 600;
             margin-bottom: 2rem;
-            color: #cbd5e0;
+            color: #475569;
             font-size: 1.05rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
         }
 
         .arch-stages {
@@ -470,38 +302,96 @@
         }
 
         .arch-stage {
-            background: rgba(51, 65, 85, 0.5);
+            background: white;
             padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
 
         .arch-stage h3 {
             font-size: 1.1rem;
             margin-bottom: 1rem;
-            color: #f1f5f9;
+            color: #0f172a;
         }
 
         .arch-stage ul {
             padding-left: 1.5rem;
-            color: #94a3b8;
+            color: #64748b;
         }
 
         .arch-stage li {
             margin-bottom: 0.5rem;
         }
 
+        /* Code Block */
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin: 1.5rem 0;
+            border: 1px solid #334155;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .info-box p {
+            color: #1e40af;
+            margin: 0.5rem 0;
+        }
+
+        /* Scenario Cards */
+        .scenario-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            transition: all 0.2s ease;
+        }
+
+        .scenario-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .scenario-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #6366f1;
+        }
+
+        .scenario-card ul {
+            padding-left: 2rem;
+            color: #475569;
+            margin-top: 1rem;
+        }
+
+        .scenario-card li {
+            margin-bottom: 0.5rem;
+        }
+
         /* Footer */
         .footer {
-            background: rgba(15, 23, 42, 0.8);
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            background: #0f172a;
+            color: white;
             padding: 3rem 2rem;
             text-align: center;
-            margin-top: 5rem;
+            margin-top: 4rem;
         }
 
         .footer p {
-            color: #94a3b8;
+            color: #cbd5e0;
             margin: 0.5rem 0;
         }
 
@@ -512,7 +402,7 @@
             }
             
             .header .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
             .section h2 {
@@ -527,23 +417,9 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-
     <!-- Header -->
     <div class="header">
         <h1>DataMagic</h1>
@@ -554,7 +430,7 @@
     <!-- Main Content -->
     <div class="container">
         <!-- Abstract -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>Abstract</h2>
             <p>
                 Data videos integrate dynamic charts, voiceover narration, and synchronized animations to convey data insights 
@@ -563,22 +439,22 @@
                 visual materials, or rely on pixel-level generation that cannot guarantee data fidelity.
             </p>
             <p>
-                We demonstrate <strong style="color: #a78bfa;">DataMagic</strong>, an end-to-end interactive system that transforms raw tabular data and 
-                natural language queries into narrative data videos. The system introduces <strong style="color: #60a5fa;">DVSpec</strong> (Data Video Specification), 
+                We demonstrate <strong>DataMagic</strong>, an end-to-end interactive system that transforms raw tabular data and 
+                natural language queries into narrative data videos. The system introduces <strong>DVSpec</strong> (Data Video Specification), 
                 a declarative format that binds visual and animation elements to underlying data fields through semantic references, 
-                ensuring traceability. It employs a <strong style="color: #ec4899;">Generate-then-Orchestrate</strong> multi-agent architecture that generates 
+                ensuring traceability. It employs a <strong>Generate-then-Orchestrate</strong> multi-agent architecture that generates 
                 candidate scenes in parallel before optimizing global narrative coherence.
             </p>
         </section>
 
         <!-- Demo Video -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>Demo Video</h2>
-            <div class="video-container glass-card">
+            <div class="video-container">
                 <div class="video-placeholder">
                     <div style="position: relative; z-index: 1;">
                         [Demo Video Placeholder - 5-minute system walkthrough]<br>
-                        <small style="color: #64748b;">Video will be embedded here (YouTube/Vimeo)</small>
+                        <small style="color: #94a3b8;">Video will be embedded here (YouTube/Vimeo)</small>
                     </div>
                 </div>
             </div>
@@ -586,12 +462,12 @@
                 <a href="#" class="link-btn">📹 Watch on YouTube</a>
                 <a href="#" class="link-btn">💻 Try Live Demo</a>
                 <a href="#" class="link-btn secondary">📄 Download Paper (PDF)</a>
-                <a href="#" class="link-btn secondary">� Supplementary Materials</a>
+                <a href="#" class="link-btn secondary">📊 Supplementary Materials</a>
             </div>
         </section>
 
         <!-- Key Features -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>Key Features</h2>
             <div class="features">
                 <div class="feature">
@@ -622,41 +498,35 @@
         </section>
 
         <!-- System Screenshots -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>System Interface</h2>
             <div class="screenshots">
                 <div class="screenshot">
-                    <div class="screenshot-img">
-                        <span style="position: relative; z-index: 1;">[Screenshot 1]</span>
-                    </div>
+                    <div class="screenshot-img">[Screenshot 1]</div>
                     <div class="screenshot-caption">
-                        <strong style="color: #a78bfa;">Scenario 1:</strong> Automated video generation from CSV data and natural language query
+                        <strong>Scenario 1:</strong> Automated video generation from CSV data and natural language query
                     </div>
                 </div>
                 <div class="screenshot">
-                    <div class="screenshot-img">
-                        <span style="position: relative; z-index: 1;">[Screenshot 2]</span>
-                    </div>
+                    <div class="screenshot-img">[Screenshot 2]</div>
                     <div class="screenshot-caption">
-                        <strong style="color: #60a5fa;">Scenario 2:</strong> Multi-modal editing interface with canvas, script, and chat modes
+                        <strong>Scenario 2:</strong> Multi-modal editing interface with canvas, script, and chat modes
                     </div>
                 </div>
                 <div class="screenshot">
-                    <div class="screenshot-img">
-                        <span style="position: relative; z-index: 1;">[Screenshot 3]</span>
-                    </div>
+                    <div class="screenshot-img">[Screenshot 3]</div>
                     <div class="screenshot-caption">
-                        <strong style="color: #ec4899;">Scenario 3:</strong> Data Q&A interface with provenance-based answers
+                        <strong>Scenario 3:</strong> Data Q&A interface with provenance-based answers
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Architecture -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>System Architecture</h2>
             <p>
-                DataMagic employs a two-stage <strong style="color: #a78bfa;">Generate-then-Orchestrate</strong> architecture:
+                DataMagic employs a two-stage <strong>Generate-then-Orchestrate</strong> architecture:
             </p>
             <div class="arch-container">
                 <div class="arch-flow">
@@ -682,13 +552,13 @@
                 </div>
             </div>
             <p style="margin-top: 2rem;">
-                <strong style="color: #60a5fa;">DVSpec</strong> serves as the declarative intermediate representation, decoupling logical description from 
+                <strong>DVSpec</strong> serves as the declarative intermediate representation, decoupling logical description from 
                 rendering implementation. It enables data-driven semantic references and narration-indexed animation triggers.
             </p>
         </section>
 
         <!-- DVSpec Example -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>DVSpec Example</h2>
             <p>Sample scene specification showing semantic references and narration-indexed triggers:</p>
             <div class="code-block">{
@@ -712,7 +582,7 @@
         </section>
 
         <!-- Evaluation -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>Evaluation Results</h2>
             <p>
                 Quantitative evaluation on 109 real-world samples from DAComp-DA and T2R-bench datasets:
@@ -735,19 +605,19 @@
                     <div class="stat-label">Success Rate</div>
                 </div>
             </div>
-            <p style="margin-top: 2rem; padding: 1.5rem; background: rgba(30, 41, 59, 0.4); border-radius: 12px; border-left: 3px solid #60a5fa;">
-                <strong>Baselines:</strong> DeepSeek-V3.2, Gemini-2.5-Pro, GPT-5, Claude-Sonnet-4 (single-pass generation)<br>
-                <strong>Metrics:</strong> Intent Fulfillment, Data Insights, Narrative Quality, Animation Effectiveness, Aesthetic Quality<br>
-                <strong>Validation:</strong> Automated scoring validated with human expert ratings (Pearson r=0.91)
-            </p>
+            <div class="info-box">
+                <p><strong>Baselines:</strong> DeepSeek-V3.2, Gemini-2.5-Pro, GPT-5, Claude-Sonnet-4 (single-pass generation)</p>
+                <p><strong>Metrics:</strong> Intent Fulfillment, Data Insights, Narrative Quality, Animation Effectiveness, Aesthetic Quality</p>
+                <p><strong>Validation:</strong> Automated scoring validated with human expert ratings (Pearson r=0.91)</p>
+            </div>
         </section>
 
         <!-- Demo Scenarios -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>Interactive Demo Scenarios</h2>
             
-            <div class="glass-card" style="margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem; color: #a78bfa; font-size: 1.4rem;">Scenario 1: Automated Generation</h3>
+            <div class="scenario-card">
+                <h3>Scenario 1: Automated Generation</h3>
                 <p>
                     Upload a CSV file (e.g., tech company financial data) and input a natural language query like 
                     "Analyze Q4 revenue peaks, regional marketing efficiency, and top product profit contributors." 
@@ -756,20 +626,20 @@
                 </p>
             </div>
 
-            <div class="glass-card" style="margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem; color: #60a5fa; font-size: 1.4rem;">Scenario 2: Multi-Modal Editing</h3>
+            <div class="scenario-card">
+                <h3>Scenario 2: Multi-Modal Editing</h3>
                 <p>
                     Refine generated videos through three interaction modes:
                 </p>
-                <ul style="padding-left: 2rem; color: #cbd5e0; margin-top: 1rem;">
-                    <li style="margin-bottom: 0.5rem;"><strong>Canvas Manipulation:</strong> Click charts to switch types, adjust mappings, or modify colors</li>
-                    <li style="margin-bottom: 0.5rem;"><strong>Script Editing:</strong> Edit narration text—animations auto-sync to new timing</li>
-                    <li style="margin-bottom: 0.5rem;"><strong>Natural Language:</strong> "@Scene 5: change to pie chart and highlight top product"</li>
+                <ul>
+                    <li><strong>Canvas Manipulation:</strong> Click charts to switch types, adjust mappings, or modify colors</li>
+                    <li><strong>Script Editing:</strong> Edit narration text—animations auto-sync to new timing</li>
+                    <li><strong>Natural Language:</strong> "@Scene 5: change to pie chart and highlight top product"</li>
                 </ul>
             </div>
 
-            <div class="glass-card" style="margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem; color: #ec4899; font-size: 1.4rem;">Scenario 3: Data Q&A</h3>
+            <div class="scenario-card">
+                <h3>Scenario 3: Data Q&A</h3>
                 <p>
                     Ask questions about the video: "Which product has the highest growth rate?" DVSpec's structured provenance 
                     maps visual elements to data fields, enabling precise retrieval from the original dataset. Convert Q&A insights 
@@ -779,7 +649,7 @@
         </section>
 
         <!-- Resources -->
-        <section class="section fade-in">
+        <section class="section">
             <h2>Resources</h2>
             <div class="links">
                 <a href="#" class="link-btn">📄 Paper (PDF)</a>
@@ -793,7 +663,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;"><strong>DataMagic: From Raw Data to Narrative Data Videos</strong></p>
+        <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">DataMagic: From Raw Data to Narrative Data Videos</p>
         <p>VLDB 2026 Demo Submission</p>
         <p style="margin-top: 1.5rem; font-size: 0.9rem;">
             For questions or collaboration inquiries, please contact: [contact info placeholder]
@@ -810,24 +680,6 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
         });
     </script>
 </body>
