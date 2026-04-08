@@ -3,692 +3,975 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DataMagic: Transforming Tabular Data into Data Insight Video</title>
+  <title>DataMagic — Transforming Tabular Data into Data Insight Video</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* ── DESIGN TOKENS (OKLCH) ── */
     :root {
-      --ink:     #1a1a1a;
-      --ink-2:   #3d3d3d;
-      --ink-3:   #6b6b6b;
-      --rule:    #e4e4e4;
-      --bg:      #fafaf8;
-      --paper:   #ffffff;
-      --accent:  #1a56db;
-      --tag-bg:  #eef2ff;
-      --tag-fg:  #3730a3;
-      --code-bg: #0f1117;
-      --green:   #15803d;
+      --bg:           oklch(97% 0.005 220);
+      --surface:      oklch(93% 0.007 220);
+      --dark:         oklch(11% 0.028 245);
+      --dark-2:       oklch(17% 0.028 245);
+      --ink:          oklch(16% 0.020 230);
+      --ink-2:        oklch(36% 0.014 230);
+      --ink-3:        oklch(58% 0.009 230);
+      --rule:         oklch(85% 0.006 220);
+      --rule-dark:    oklch(24% 0.028 245);
+      --amber:        oklch(73% 0.21 200);
+      --amber-dim:    oklch(56% 0.18 200);
+      --amber-glow:   oklch(94% 0.045 210);
+      --green:        oklch(65% 0.17 160);
+      --ease-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-quart:   cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg);
       color: var(--ink);
-      font-size: 16px;
-      line-height: 1.7;
+      font-size: 17px;
+      line-height: 1.72;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 650ms var(--ease-expo), transform 650ms var(--ease-expo);
+      transition-delay: calc(var(--stagger, 0) * 75ms);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
 
     /* ── NAV ── */
     .nav {
-      background: rgba(250,250,248,0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--rule);
-      position: sticky; top: 0; z-index: 40;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      border-bottom: 1px solid var(--rule-dark);
+      transition: background 300ms var(--ease-quart),
+                  border-color 300ms var(--ease-quart);
     }
     .nav-inner {
-      max-width: 860px; margin: 0 auto;
+      max-width: 1040px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem; height: 48px;
+      padding: 0 2rem; height: 52px;
     }
     .nav-logo {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.05rem; color: var(--ink);
-      text-decoration: none;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.1rem; font-weight: 400; letter-spacing: -0.2px;
+      color: #fff; text-decoration: none;
+      transition: color 250ms;
     }
-    .nav-logo b { color: var(--accent); font-weight: 400; }
-    .nav-links { display: flex; gap: 0; }
+    .nav-logo em { font-style: italic; color: var(--amber); }
+    .nav-links { display: flex; }
     .nav-links a {
-      font-size: 0.8rem; font-weight: 400; color: var(--ink-3);
-      text-decoration: none; padding: 0.3rem 0.65rem; border-radius: 5px;
-      transition: color 0.12s, background 0.12s;
-      white-space: nowrap;
+      font-size: 0.85rem; color: oklch(58% 0.01 220);
+      text-decoration: none; padding: 0.3rem 0.7rem; border-radius: 4px;
+      transition: color 150ms; white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--accent); background: var(--tag-bg); }
+    .nav-links a:hover { color: #fff; }
 
-    /* ── HERO ── */
-    .hero {
-      max-width: 860px; margin: 0 auto;
-      padding: 5rem 2rem 3.5rem;
-      text-align: center;
-    }
-    .venue-tag {
-      display: inline-block;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--tag-fg);
-      background: var(--tag-bg); padding: 0.25rem 0.8rem;
-      border-radius: 999px; margin-bottom: 1.8rem;
-    }
-    .hero h1 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(2rem, 4.5vw, 2.9rem);
-      font-weight: 400; color: var(--ink);
-      line-height: 1.2; letter-spacing: -0.5px;
-      max-width: 680px; margin: 0 auto 1.8rem;
-    }
-    .hero h1 i { font-style: italic; }
-
-    /* Authors */
-    .authors {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 0.25rem 0.6rem;
-      font-size: 0.88rem; color: var(--ink-2);
-      margin-bottom: 0.5rem;
-    }
-    .authors span { white-space: nowrap; }
-    .authors .sep { color: var(--rule); }
-    .affil {
-      font-size: 0.8rem; color: var(--ink-3);
-      margin-bottom: 2.2rem;
-    }
-
-    /* Buttons */
-    .btns {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
-    }
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.55rem 1.2rem; border-radius: 6px;
-      font-size: 0.85rem; font-weight: 500;
-      text-decoration: none; transition: all 0.12s;
-      border: 1.5px solid transparent;
-      font-family: 'DM Sans', system-ui, sans-serif;
-    }
-    .btn-filled {
-      background: var(--ink); color: #fff;
-      border-color: var(--ink);
-    }
-    .btn-filled:hover { background: var(--ink-2); border-color: var(--ink-2); }
-    .btn-outline {
-      background: transparent; color: var(--ink-2);
+    /* scrolled — over light content */
+    .nav.scrolled {
+      background: oklch(97% 0.006 80 / 0.94);
+      backdrop-filter: blur(14px);
       border-color: var(--rule);
     }
-    .btn-outline:hover { border-color: var(--ink-2); color: var(--ink); }
+    .nav.scrolled .nav-logo { color: var(--ink); }
+    .nav.scrolled .nav-links a { color: var(--ink-3); }
+    .nav.scrolled .nav-links a:hover { color: var(--ink); }
 
-    /* ── PAGE BODY ── */
-    .page { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
-    hr.divider { border: none; border-top: 1px solid var(--rule); margin: 0; }
+    /* ── HERO (dark) ── */
+    #hero {
+      background: var(--dark);
+      padding: clamp(5rem, 10vw, 7rem) 2rem clamp(4rem, 8vw, 5.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(oklch(73% 0.21 200 / 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(73% 0.21 200 / 0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 110%, transparent 0%, black 65%);
+      mask-image: radial-gradient(ellipse 90% 85% at 50% 110%, transparent 0%, black 65%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: 15%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(ellipse, oklch(73% 0.21 200 / 0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
 
-    /* ── SECTION ── */
-    .sec { padding: 3.5rem 0; }
-    .sec-label {
+    .venue-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
       font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--ink-3);
-      margin-bottom: 0.6rem;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 2.2rem;
     }
-    .sec h2 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.7rem; font-weight: 400; color: var(--ink);
-      letter-spacing: -0.3px; margin-bottom: 1.25rem; line-height: 1.25;
+    .venue-badge::before {
+      content: ''; display: block;
+      width: 28px; height: 1px; background: var(--amber);
+      flex-shrink: 0;
     }
-    .sec p {
-      color: var(--ink-2); line-height: 1.85;
-      margin-bottom: 1rem; font-size: 0.97rem;
-    }
-    .sec p:last-child { margin-bottom: 0; }
 
-    /* ── VIDEO ── */
-    .video-wrap {
-      background: #000; border-radius: 10px;
-      overflow: hidden; margin: 1.75rem auto 0;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-      max-width: 800px;
+    .hero-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+      font-weight: 300; letter-spacing: -1.5px; line-height: 1.05;
+      color: oklch(96% 0.005 80); margin-bottom: 2.5rem; max-width: 860px;
     }
-    .video-wrap video { width: 100%; display: block; }
+    .hero-title em { font-style: italic; color: var(--amber); }
 
-    /* ── FIGURE ── */
-    .fig {
-      margin: 2rem auto;
-      max-width: 780px;
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 2.5rem;
+      padding-top: 2rem; border-top: 1px solid var(--rule-dark);
     }
-    .fig img {
-      width: 100%; display: block;
-      border-radius: 8px;
-      border: 1px solid var(--rule);
+    .hero-authors { flex: 1; min-width: 260px; }
+    .meta-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: oklch(38% 0.01 55);
+      margin-bottom: 0.45rem;
     }
-    .fig-cap {
-      margin-top: 0.7rem;
-      font-size: 0.82rem; color: var(--ink-3);
-      line-height: 1.55; text-align: center;
+    .hero-names {
+      font-size: 0.88rem; color: oklch(72% 0.007 55); line-height: 1.65;
     }
-    .fig-cap b { color: var(--ink-2); }
+    .hero-affil {
+      font-size: 0.79rem; color: oklch(45% 0.01 55); margin-top: 0.2rem;
+    }
+    .hero-btns { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.5rem; }
 
-    /* ── FEATURE LIST (no cards) ── */
-    .feat-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem 2.5rem;
-      margin-top: 1.5rem;
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.55rem 1.2rem; border-radius: 4px;
+      font-size: 0.88rem; font-weight: 500;
+      text-decoration: none; border: 1px solid transparent;
+      font-family: 'Inter', system-ui, sans-serif;
+      transition: background 130ms, border-color 130ms, color 130ms, opacity 130ms;
+      white-space: nowrap;
     }
-    .feat { display: flex; gap: 0.9rem; }
-    .feat-icon {
-      flex-shrink: 0; width: 28px; height: 28px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; margin-top: 0.1rem;
+    .btn-amber  { background: var(--amber); color: var(--dark); border-color: var(--amber); }
+    .btn-amber:hover { background: var(--amber-dim); border-color: var(--amber-dim); }
+    .btn-ghost-light { background: transparent; color: oklch(72% 0.009 220); border-color: var(--rule-dark); }
+    .btn-ghost-light:hover { border-color: oklch(58% 0.015 220); color: oklch(90% 0.008 210); }
+    .btn-solid  { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .btn-solid:hover { opacity: 0.82; }
+    .btn-ghost  { background: transparent; color: var(--ink-2); border-color: var(--rule); }
+    .btn-ghost:hover { border-color: var(--ink-2); color: var(--ink); }
+
+    /* ── SECTION SHELL ── */
+    .sec { padding: clamp(3.5rem, 7vw, 5.5rem) 2rem; }
+    .sec-inner { max-width: 1040px; margin: 0 auto; }
+    .sec--surface { background: var(--surface); }
+    .sec--dark    { background: var(--dark); color: oklch(90% 0.006 215); }
+    /* lightened dark — for video hero section */
+    .sec--mid     { background: oklch(19% 0.028 240) !important; }
+
+    hr.divider { border: none; border-top: 1px solid var(--rule); }
+    hr.divider-dark { border: none; border-top: 1px solid var(--rule-dark); }
+
+    /* subtle grid texture on dark sections */
+    .sec--dark {
+      position: relative;
+    }
+    .sec--dark::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(oklch(73% 0.21 200 / 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(73% 0.21 200 / 0.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+    }
+    .sec--dark .sec-inner { position: relative; z-index: 1; }
+
+    /* Section labels & headings */
+    .eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.6rem;
+    }
+    .sec--dark .eyebrow { color: oklch(48% 0.012 220); }
+    .eyebrow--amber { color: var(--amber-dim) !important; }
+    .sec--dark .eyebrow--amber { color: var(--amber) !important; }
+
+    h2.sec-head {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      font-weight: 300; letter-spacing: -0.7px; line-height: 1.18;
+      color: var(--ink); margin-bottom: 1.4rem;
+    }
+    .sec--dark h2.sec-head { color: oklch(95% 0.006 215); }
+    h2.sec-head em { font-style: italic; color: var(--amber); }
+
+    .lead {
+      font-size: 1.08rem; color: var(--ink-2); line-height: 1.82;
+      max-width: 72ch; margin-bottom: 1.5rem;
+    }
+    .sec--dark .lead { color: oklch(68% 0.008 220); }
+    .prose { color: var(--ink-2); line-height: 1.85; max-width: 72ch; }
+    .prose p { font-size: 1rem; margin-bottom: 1.1rem; }
+    .prose p:last-child { margin-bottom: 0; }
+    .sec--dark .prose p { color: oklch(68% 0.008 220); }
+
+    /* ── VIDEO PLAYER ── */
+    .video-frame {
+      background: #000; border-radius: 10px; overflow: hidden;
+      margin-top: 2rem; max-width: 940px;
+      box-shadow: 0 24px 64px oklch(0% 0 0 / 0.45);
+    }
+    .video-frame video { width: 100%; display: block; }
+
+    /* ── FEATURES — editorial numbered list ── */
+    .feat-list { margin-top: 2.5rem; border-top: 1px solid var(--rule); }
+    .feat-item {
+      display: grid; grid-template-columns: 4.5rem 1fr;
+      gap: 0 2rem; padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .feat-num {
+      font-family: 'Fraunces', serif; font-size: 0.85rem;
+      font-weight: 600; color: var(--amber-dim);
+      padding-top: 0.1rem; font-style: italic;
     }
     .feat-body h3 {
-      font-size: 0.9rem; font-weight: 600; color: var(--ink);
-      margin-bottom: 0.2rem;
+      font-size: 1.05rem; font-weight: 600; color: var(--ink);
+      margin-bottom: 0.4rem; line-height: 1.3;
     }
     .feat-body p {
-      font-size: 0.84rem; color: var(--ink-3);
-      line-height: 1.6; margin: 0;
+      font-size: 0.95rem; color: var(--ink-3); line-height: 1.72; margin: 0;
     }
 
-    /* ── PIPELINE ── */
+    /* ── PIPELINE FLOW ── */
     .flow {
-      display: flex; align-items: center; gap: 0.5rem;
-      flex-wrap: wrap; justify-content: center;
-      margin: 1.75rem 0; font-size: 0.85rem;
+      display: flex; align-items: center;
+      flex-wrap: nowrap; gap: 0;
+      margin: 2.5rem 0; font-size: 0.82rem; overflow-x: auto;
+      padding-bottom: 0.5rem;
     }
     .flow-node {
-      background: var(--paper); border: 1px solid var(--rule);
-      border-radius: 6px; padding: 0.4rem 0.85rem;
-      font-weight: 500; color: var(--ink); white-space: nowrap;
+      background: var(--bg); border: 1px solid var(--rule);
+      border-radius: 4px; padding: 0.5rem 0.95rem;
+      font-weight: 500; color: var(--ink); white-space: nowrap; flex-shrink: 0;
     }
+    .sec--surface .flow-node { background: var(--surface); }
     .flow-node.hi {
-      background: var(--ink); color: #fff; border-color: var(--ink);
+      background: var(--amber); color: var(--dark);
+      border-color: var(--amber); font-weight: 600;
     }
-    .flow-arr { color: var(--ink-3); font-size: 0.9rem; }
+    .flow-arr { color: var(--ink-3); padding: 0 0.45rem; flex-shrink: 0; }
 
     .stage-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 0; border: 1px solid var(--rule); border-radius: 8px;
-      overflow: hidden; margin: 1.5rem 0;
-      background: var(--paper);
+      gap: 1.5rem; margin: 2rem 0;
     }
-    .stage { padding: 1.4rem 1.6rem; }
-    .stage + .stage { border-left: 1px solid var(--rule); }
+    .stage {
+      border: 1px solid var(--rule); border-radius: 8px;
+      padding: 1.6rem 1.8rem; background: var(--bg);
+    }
+    .sec--surface .stage { background: var(--bg); }
     .stage-num {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
-      color: var(--accent); text-transform: uppercase;
-      margin-bottom: 0.4rem;
+      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--amber-dim); margin-bottom: 0.55rem;
     }
     .stage h3 {
-      font-size: 0.88rem; font-weight: 600; color: var(--ink);
-      margin-bottom: 0.85rem;
+      font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem;
     }
     .stage ul { list-style: none; }
     .stage ul li {
-      font-size: 0.82rem; color: var(--ink-3); line-height: 1.55;
-      padding: 0.2rem 0 0.2rem 1rem; position: relative;
+      font-size: 0.9rem; color: var(--ink-3); line-height: 1.68;
+      padding: 0.28rem 0 0.28rem 1rem; position: relative;
     }
-    .stage ul li::before {
-      content: '–'; position: absolute; left: 0; color: var(--rule);
-    }
+    .stage ul li::before { content: '–'; position: absolute; left: 0; color: var(--rule); }
 
-    /* ── TWO-COL PROPS ── */
-    .props {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 0; border: 1px solid var(--rule);
-      border-radius: 8px; overflow: hidden;
-      margin: 1.5rem 0; background: var(--paper);
+    /* ── FIGURE ── */
+    .fig { margin: 2.5rem auto; max-width: 940px; }
+    .fig img { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--rule); }
+    .fig-cap {
+      margin-top: 0.8rem; font-size: 0.85rem;
+      color: var(--ink-3); line-height: 1.58; text-align: center;
     }
-    .prop { padding: 1.4rem 1.6rem; }
-    .prop + .prop { border-left: 1px solid var(--rule); }
-    .prop h3 {
-      font-size: 0.88rem; font-weight: 600; color: var(--ink);
-      margin-bottom: 0.5rem;
-    }
-    .prop p { font-size: 0.83rem; color: var(--ink-3); line-height: 1.6; margin: 0; }
+    .fig-cap strong { color: var(--ink-2); }
 
-    /* ── CODE ── */
+    /* ── CODE BLOCK ── */
     .code-wrap {
-      background: var(--code-bg); border-radius: 8px;
-      overflow: hidden; margin: 1.75rem 0;
+      background: oklch(13% 0.01 55); border-radius: 8px;
+      overflow: hidden; margin: 2rem 0;
     }
     .code-bar {
       padding: 0.55rem 1rem;
       display: flex; align-items: center; gap: 0.35rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid oklch(22% 0.01 55 / 0.7);
     }
     .dot { width: 9px; height: 9px; border-radius: 50%; }
     .dot-r { background: #ff5f57; }
     .dot-y { background: #febc2e; }
     .dot-g { background: #28c840; }
-    .code-fname { margin-left: 0.4rem; font-size: 0.75rem; color: #6e7681; font-family: 'JetBrains Mono', monospace; }
+    .code-fname {
+      margin-left: 0.4rem; font-size: 0.73rem;
+      color: oklch(44% 0.01 55); font-family: 'JetBrains Mono', monospace;
+    }
     pre {
-      padding: 1.4rem 1.6rem;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.8rem; line-height: 1.75;
-      color: #c9d1d9; overflow-x: auto;
+      padding: 1.5rem 1.75rem; overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.77rem; line-height: 1.82; color: oklch(86% 0.008 80);
     }
-    .k { color: #ff7b72; }
-    .s { color: #a5d6ff; }
-    .n { color: #f0c27f; }
-    .c { color: #6e7681; font-style: italic; }
+    .tk { color: oklch(72% 0.18 12); }   /* key/token */
+    .ts { color: oklch(76% 0.12 148); }  /* string */
+    .tn { color: oklch(78% 0.15 70); }   /* number */
+    .tc { color: oklch(45% 0.01 55); font-style: italic; } /* comment */
+    .tp { color: oklch(62% 0.08 250); }  /* property */
 
-    /* ── STATS ROW ── */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
+    /* ── PROPS 2-COL ── */
+    .props-2 {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin: 2rem 0;
+    }
+    .prop-card {
       border: 1px solid var(--rule); border-radius: 8px;
-      overflow: hidden; margin: 1.75rem 0;
-      background: var(--paper);
+      padding: 1.5rem 1.75rem; background: var(--bg);
     }
-    .stat {
-      padding: 1.5rem 1.2rem; text-align: center;
-      border-right: 1px solid var(--rule);
+    .prop-card h3 {
+      font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem;
     }
-    .stat:last-child { border-right: none; }
-    .stat-val {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2rem; color: var(--ink); line-height: 1;
-      margin-bottom: 0.35rem; font-weight: 400;
+    .prop-card p {
+      font-size: 0.92rem; color: var(--ink-3); line-height: 1.7; margin: 0;
     }
-    .stat-val.up { color: var(--green); }
-    .stat-val.warn { color: #92400e; }
-    .stat-label {
-      font-size: 0.75rem; color: var(--ink-3); line-height: 1.4;
+    code.inline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8em; background: var(--surface);
+      padding: 1px 5px; border-radius: 3px; color: var(--ink-2);
     }
 
-    /* second stats row – smaller */
-    .stats-2 {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid var(--rule); border-top: none; border-radius: 0 0 8px 8px;
-      overflow: hidden; margin-top: -1px;
-      background: #fafaf8;
+    /* ── DATA STREAM ANIMATION ── */
+    @keyframes data-pulse {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
     }
-    .stats-2 .stat {
-      border-top: 1px solid var(--rule);
-      border-right: 1px solid var(--rule);
-      background: transparent;
+    @keyframes glow-in {
+      from { text-shadow: none; }
+      to   { text-shadow: 0 0 22px oklch(65% 0.17 160 / 0.55); }
     }
-    .stats-2 .stat:last-child { border-right: none; }
-    .stats-2 .stat-val { font-size: 1.5rem; }
+    .venue-badge {
+      animation: data-pulse 3.5s ease-in-out infinite;
+    }
+    .flow-node.hi {
+      box-shadow: 0 0 18px oklch(73% 0.21 200 / 0.45), inset 0 0 12px oklch(73% 0.21 200 / 0.12);
+    }
+    .metric-val.pos {
+      text-shadow: 0 0 22px oklch(65% 0.17 160 / 0.5);
+    }
+    .metric-val.warn {
+      text-shadow: 0 0 18px oklch(60% 0.15 48 / 0.45);
+    }
+    .study-big {
+      text-shadow: 0 0 28px oklch(73% 0.21 200 / 0.55);
+    }
 
-    /* ── NOTE BOX ── */
-    .note {
-      border-left: 3px solid var(--accent);
-      padding: 1rem 1.25rem;
-      margin: 1.5rem 0;
-      background: var(--tag-bg);
+    /* Tech-tinted nav scrolled state */
+    .nav.scrolled {
+      background: oklch(97% 0.005 220 / 0.94);
+      backdrop-filter: blur(14px);
+      border-color: var(--rule);
+    }
+
+    /* Subtle glow on stage cards hover */
+    .stage {
+      transition: box-shadow 250ms var(--ease-quart), border-color 250ms var(--ease-quart);
+    }
+    .stage:hover {
+      border-color: oklch(73% 0.21 200 / 0.4);
+      box-shadow: 0 0 24px oklch(73% 0.21 200 / 0.1);
+    }
+    .prop-card {
+      transition: box-shadow 250ms var(--ease-quart), border-color 250ms var(--ease-quart);
+    }
+    .prop-card:hover {
+      border-color: oklch(73% 0.21 200 / 0.35);
+      box-shadow: 0 0 20px oklch(73% 0.21 200 / 0.08);
+    }
+
+    /* ── RESULTS METRIC ROW ── */
+    .metric-row {
+      display: flex; flex-wrap: wrap; gap: 0;
+      border: 1px solid var(--rule); border-radius: 8px;
+      overflow: hidden; margin: 2.2rem 0; background: var(--bg);
+    }
+    .sec--surface .metric-row { background: var(--surface); }
+    .metric-cell {
+      flex: 1; min-width: 160px;
+      padding: 1.6rem 1.4rem;
+      border-right: 1px solid var(--rule);
+    }
+    .metric-cell:last-child { border-right: none; }
+    .metric-label {
+      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.5rem;
+    }
+    .metric-val {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem; font-weight: 300;
+      color: var(--ink); line-height: 1.05;
+      margin-bottom: 0.25rem; letter-spacing: -0.5px;
+    }
+    .metric-val.pos  { color: var(--green); }
+    .metric-val.warn { color: oklch(60% 0.15 48); }
+    .metric-sub { font-size: 0.8rem; color: var(--ink-3); line-height: 1.4; }
+
+    /* pull-quote highlight */
+    .pull {
+      border-left: 3px solid var(--amber);
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      background: var(--amber-glow);
       border-radius: 0 6px 6px 0;
     }
-    .note p { font-size: 0.87rem; color: var(--tag-fg); margin: 0 0 0.3rem; line-height: 1.65; }
-    .note p:last-child { margin: 0; }
-
-    /* ── SCENARIOS ── */
-    .scenario { margin-bottom: 2rem; }
-    .scenario-head {
-      display: flex; align-items: baseline; gap: 0.75rem;
-      margin-bottom: 0.75rem;
+    .pull p {
+      font-size: 1rem; color: var(--ink); line-height: 1.78; margin: 0;
     }
-    .step-tag {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--accent);
-      background: var(--tag-bg); padding: 0.2rem 0.6rem;
-      border-radius: 4px; flex-shrink: 0;
+
+    /* ── USER STUDY ── */
+    .study-pair {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .study-card {
+      border: 1px solid var(--rule-dark); border-radius: 8px;
+      padding: 1.75rem; background: var(--dark-2);
+    }
+    .study-card-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: oklch(40% 0.01 55); margin-bottom: 0.75rem;
+    }
+    .study-big {
+      font-family: 'Fraunces', serif;
+      font-size: 3.5rem; font-weight: 300;
+      color: var(--amber); line-height: 1;
+      letter-spacing: -1.5px; margin-bottom: 0.4rem;
+    }
+    .study-desc {
+      font-size: 0.92rem; color: oklch(58% 0.01 220); line-height: 1.65;
+    }
+
+    /* NASA-TLX comparison list */
+    .tlx-list { margin-top: 2.2rem; border-top: 1px solid var(--rule-dark); }
+    .tlx-header {
+      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: oklch(45% 0.012 220);
+      padding: 0.75rem 0; border-bottom: 1px solid var(--rule-dark);
+    }
+    .tlx-row {
+      display: grid; grid-template-columns: 1fr auto auto;
+      align-items: center; gap: 1.5rem;
+      padding: 0.9rem 0; border-bottom: 1px solid var(--rule-dark);
+      font-size: 0.92rem;
+    }
+    .tlx-dim { color: oklch(80% 0.008 215); font-weight: 500; }
+    .tlx-scores { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; white-space: nowrap; }
+    .tlx-dm  { color: var(--amber); }
+    .tlx-vs  { color: oklch(40% 0.012 220); margin: 0 0.2rem; }
+    .tlx-bl  { color: oklch(48% 0.012 220); }
+    .tlx-change {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+      color: var(--green); white-space: nowrap; text-align: right;
+    }
+
+    /* ── SAMPLE OUTPUTS GALLERY ── */
+    .video-gallery {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .video-card-inner {
+      background: #000; border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--rule);
+      box-shadow: 0 8px 32px oklch(0% 0 0 / 0.18);
+    }
+    .video-card-inner video { width: 100%; display: block; }
+    .video-card-label {
+      margin-top: 0.75rem; font-size: 0.9rem; font-weight: 500;
+      color: var(--ink-2); line-height: 1.4;
+    }
+
+    /* ── DEMO SCENARIOS ── */
+    .scenario { margin-bottom: 2.75rem; }
+    .scenario:last-child { margin-bottom: 0; }
+    .scenario-head {
+      display: flex; align-items: baseline; gap: 0.8rem;
+      margin-bottom: 0.9rem; padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .scenario-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--amber-dim);
+      background: var(--amber-glow); padding: 0.22rem 0.6rem;
+      border-radius: 3px; flex-shrink: 0;
     }
     .scenario h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem; font-weight: 400; color: var(--ink);
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem; font-weight: 400; color: var(--ink); font-style: italic;
     }
-    .scenario p { font-size: 0.93rem; margin-bottom: 0.6rem; }
+    .scenario p { font-size: 0.97rem; color: var(--ink-2); margin-bottom: 0.6rem; }
     .scenario ul { list-style: none; padding: 0; }
     .scenario ul li {
-      font-size: 0.9rem; color: var(--ink-2);
-      padding: 0.4rem 0 0.4rem 1.2rem;
+      font-size: 0.95rem; color: var(--ink-2);
+      padding: 0.45rem 0 0.45rem 1.25rem; position: relative;
       border-top: 1px solid var(--rule);
-      position: relative;
     }
     .scenario ul li:first-child { border-top: none; }
     .scenario ul li::before {
       content: '→'; position: absolute; left: 0;
-      color: var(--ink-3); font-size: 0.75rem; top: 0.55rem;
+      color: var(--ink-3); font-size: 0.75rem; top: 0.58rem;
     }
 
     /* ── CITE ── */
     .cite {
-      background: var(--paper); border: 1px solid var(--rule);
-      border-radius: 8px; padding: 1.2rem 1.4rem;
+      background: var(--bg); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 1.4rem 1.6rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.77rem; color: var(--ink-3);
-      line-height: 1.85; margin-top: 1.5rem; overflow-x: auto;
+      font-size: 0.82rem; color: var(--ink-3);
+      line-height: 2; margin-top: 2rem; overflow-x: auto;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--ink); color: rgba(255,255,255,0.5);
-      text-align: center; padding: 2.5rem 1.5rem;
+      background: oklch(9% 0.028 245);
+      color: oklch(35% 0.01 55);
+      text-align: center; padding: 3.5rem 2rem;
     }
-    footer p { font-size: 0.8rem; margin-bottom: 0.25rem; }
-    footer a { color: rgba(255,255,255,0.65); text-decoration: none; }
-    footer strong { color: rgba(255,255,255,0.85); }
+    footer p { font-size: 0.84rem; margin-bottom: 0.3rem; }
+    footer strong { color: oklch(72% 0.007 55); }
+    footer a { color: oklch(42% 0.01 55); text-decoration: none; transition: color 150ms; }
+    footer a:hover { color: var(--amber); }
+    footer .footer-rule { border: none; border-top: 1px solid oklch(22% 0.012 55); margin: 1.5rem auto; max-width: 120px; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
+    @media (max-width: 680px) {
       .nav-links { display: none; }
-      .feat-list { grid-template-columns: 1fr; }
-      .stage-grid { grid-template-columns: 1fr; }
-      .stage + .stage { border-left: none; border-top: 1px solid var(--rule); }
-      .props { grid-template-columns: 1fr; }
-      .prop + .prop { border-left: none; border-top: 1px solid var(--rule); }
-      .stats { grid-template-columns: 1fr 1fr; }
-      .stats .stat:nth-child(2) { border-right: none; }
-      .stats .stat:nth-child(3) { border-top: 1px solid var(--rule); grid-column: span 2; border-right: none; }
+      .stage-grid, .props-2, .video-gallery, .study-pair { grid-template-columns: 1fr; }
+      .feat-item { grid-template-columns: 3rem 1fr; }
+      .hero-title { letter-spacing: -0.8px; }
+      .metric-row { flex-direction: column; }
+      .metric-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+      .metric-cell:last-child { border-bottom: none; }
+      .tlx-row { grid-template-columns: 1fr auto; }
+      .tlx-change { display: none; }
     }
   </style>
 </head>
 <body>
 
-<nav class="nav">
+<!-- ══ NAV ══ -->
+<nav class="nav" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="#"><i>Data</i><b>Magic</b></a>
+    <a class="nav-logo" href="#"><em>Data</em>Magic</a>
     <div class="nav-links">
       <a href="#abstract">Abstract</a>
       <a href="#video">Video</a>
+      <a href="#samples">Samples</a>
       <a href="#arch">Architecture</a>
       <a href="#dvspec">DVSpec</a>
       <a href="#results">Results</a>
-      <a href="#demo">Demo</a>
       <a href="#resources">Resources</a>
     </div>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="venue-tag">VLDB 2026 · Demo Paper</div>
-  <h1><i>DataMagic</i>: Transforming Tabular Data into Data Insight Video</h1>
-
-  <div class="authors">
-    <span>Yupeng Xie</span><span class="sep">·</span>
-    <span>Chen Ma</span><span class="sep">·</span>
-    <span>Zhenyang Wang</span><span class="sep">·</span>
-    <span>Liangwei Wang</span><span class="sep">·</span>
-    <span>Jiayi Zhu</span><span class="sep">·</span>
-    <span>Chuxuan Zeng</span><span class="sep">·</span>
-    <span>Zhouan Shen</span><span class="sep">·</span>
-    <span>Boyan Li</span><span class="sep">·</span>
-    <span>Yuyu Luo</span>
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="venue-badge">VLDB 2026 &thinsp;&middot;&thinsp; Demo Paper</div>
+    <h1 class="hero-title">
+      <em>DataMagic</em>: Transforming<br>
+      Tabular Data into<br>
+      Data Insight Video
+    </h1>
+    <div class="hero-meta">
+      <div class="hero-authors">
+        <div class="meta-label">Authors</div>
+        <div class="hero-names">
+          Yupeng Xie &middot; Chen Ma &middot; Zhenyang Wang &middot; Liangwei Wang<br>
+          Jiayi Zhu &middot; Chuxuan Zeng &middot; Zhouan Shen &middot; Boyan Li &middot; Yuyu Luo
+        </div>
+        <div class="hero-affil">HKUST (GZ) &nbsp;&middot;&nbsp; China Unicom</div>
+      </div>
+      <div class="hero-btns">
+        <a href="#video" class="btn btn-amber">&#9654;&thinsp; Demo Video</a>
+        <a href="https://datamagic-home.github.io/" class="btn btn-ghost-light">Live Demo</a>
+        <a href="#" class="btn btn-ghost-light">Paper PDF</a>
+        <a href="#" class="btn btn-ghost-light">GitHub</a>
+      </div>
+    </div>
   </div>
-  <p class="affil">HKUST (GZ) &nbsp;·&nbsp; China Unicom</p>
-
-  <div class="btns">
-    <a href="#video" class="btn btn-filled">▶ &thinsp;Demo Video</a>
-    <a href="https://datamagic-home.github.io/" class="btn btn-filled">Live Demo</a>
-    <a href="论文/vldb_demo/DataMagic Transforming Tabular Data into Data Insight Video.pdf" class="btn btn-outline">Paper PDF</a>
-    <a href="#" class="btn btn-outline">GitHub (soon)</a>
-  </div>
-</div>
+</section>
 
 <hr class="divider">
 
-<div class="page">
+<!-- ══ ABSTRACT ══ -->
+<section class="sec" id="abstract">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Abstract</div>
+    <h2 class="sec-head reveal">Raw data to narrative video, <em>end-to-end</em></h2>
+    <div class="prose reveal">
+      <p>Data videos integrate dynamic charts, voice narration, and synchronized animations to communicate data insights as temporal narratives. Yet producing them demands cross-domain expertise across data analysis, narrative design, and video production — a barrier that existing tools cannot remove: static BI dashboards lack animation; authoring tools need pre-prepared charts; pixel-level generators (e.g., Sora) produce numerical hallucinations with no data provenance.</p>
+      <p>We demonstrate <strong>DataMagic</strong>, an end-to-end interactive system that transforms raw tabular data and natural language queries into narrative data-insight videos. The system introduces <strong>DVSpec</strong> — a declarative specification that binds visual and animation elements to underlying data fields through semantic references, ensuring full provenance. A <strong>Generate-then-Orchestrate</strong> multi-agent strategy generates candidate scenes in parallel before globally optimizing narrative coherence. DVSpec further serves as a shared editable state supporting three complementary interaction modes, bridging full automation with fine-grained human control.</p>
+      <p>Evaluation on <strong>109 real-world samples</strong> validates system effectiveness, and a within-subjects user study (N = 12) confirms that DataMagic reduces video creation time by <strong>78.6%</strong> compared to a conversational LLM workflow.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- Abstract -->
-  <section class="sec" id="abstract">
-    <div class="sec-label">Abstract</div>
-    <h2>Raw data to narrative video, end-to-end</h2>
-    <p>Data videos integrate dynamic charts, voice narration, and synchronized animations to communicate data insights as temporal narratives. Yet producing them requires cross-domain expertise across data analysis, narrative design, and video production — a barrier that existing tools cannot remove: static BI dashboards lack animation; authoring tools need pre-prepared charts; pixel-level generators (e.g., Sora) produce numerical hallucinations with no data provenance.</p>
-    <p>We demonstrate <strong>DataMagic</strong>, an end-to-end interactive system that transforms raw tabular data and natural language queries into narrative data-insight videos. The system introduces <strong>DVSpec</strong>, a declarative specification that binds visual and animation elements to underlying data fields through data-driven semantic references, ensuring full provenance. A <strong>Generate-then-Orchestrate</strong> multi-agent architecture generates candidate scenes in parallel before optimizing global narrative coherence. Evaluation on <strong>109 real-world samples</strong> validates system effectiveness.</p>
-  </section>
+<hr class="divider">
 
-  <hr class="divider">
-
-  <!-- Video -->
-  <section class="sec" id="video">
-    <div class="sec-label">Demo Video</div>
-    <h2>System walkthrough</h2>
-    <div class="video-wrap">
+<!-- ══ DEMO VIDEO ══ -->
+<section class="sec sec--dark sec--mid" id="video">
+  <div class="sec-inner">
+    <div class="eyebrow eyebrow--amber reveal">Demo Video</div>
+    <h2 class="sec-head reveal">System walkthrough</h2>
+    <div class="video-frame reveal">
       <video controls preload="metadata">
         <source src="assets/DataMagic.mp4" type="video/mp4">
       </video>
     </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider">
+<!-- ══ SAMPLE OUTPUTS ══ -->
+<section class="sec sec--surface" id="samples">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Sample Outputs</div>
+    <h2 class="sec-head reveal">Generated video examples</h2>
+    <p class="lead reveal">Representative data videos produced by DataMagic from raw tabular datasets and natural language queries. Both examples demonstrate multi-scene narrative structure with automatic audio-visual synchronization via DVSpec.</p>
+    <div class="video-gallery">
+      <div class="reveal">
+        <div class="video-card-inner">
+          <video controls preload="metadata">
+            <source src="video/SampleOutput_Q4_Performance_and_Marketing_Insights.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-card-label">Q4 Performance &amp; Marketing Insights</div>
+      </div>
+      <div class="reveal" style="--stagger:1">
+        <div class="video-card-inner">
+          <video controls preload="metadata">
+            <source src="video/SampleOutput_Temperature_SolarRadiation.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-card-label">Temperature &amp; Solar Radiation Analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Features -->
-  <section class="sec" id="features">
-    <div class="sec-label">Highlights</div>
-    <h2>What DataMagic brings to the table</h2>
+<hr class="divider">
+
+<!-- ══ FEATURES ══ -->
+<section class="sec" id="features">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Highlights</div>
+    <h2 class="sec-head reveal">What DataMagic brings<br>to the table</h2>
     <div class="feat-list">
-      <div class="feat">
-        <div class="feat-icon">🔗</div>
+      <div class="feat-item reveal" style="--stagger:0">
+        <div class="feat-num">01</div>
         <div class="feat-body">
           <h3>Data fidelity via DVSpec</h3>
-          <p>Every visual element is semantically bound to source data — no hallucinations, full provenance from pixel back to CSV row.</p>
+          <p>Every visual element is semantically bound to source data — no hallucinations, full provenance from pixel back to CSV row. Animation targets reference data attribute values, not hard-coded screen coordinates.</p>
         </div>
       </div>
-      <div class="feat">
-        <div class="feat-icon">⏱</div>
+      <div class="feat-item reveal" style="--stagger:1">
+        <div class="feat-num">02</div>
         <div class="feat-body">
           <h3>Auto audio-visual sync</h3>
-          <p>Animation triggers use narration indices, not timestamps. Edit a script line and sync is preserved automatically.</p>
+          <p>Animation triggers use narration segment indices, not timestamps. Edit a script line — TTS duration changes, animation timing re-aligns automatically. No manual keyframe adjustment.</p>
         </div>
       </div>
-      <div class="feat">
-        <div class="feat-icon">🤖</div>
+      <div class="feat-item reveal" style="--stagger:2">
+        <div class="feat-num">03</div>
         <div class="feat-body">
-          <h3>Generate-then-Orchestrate</h3>
-          <p>Parallel scene generation decouples local quality from global coherence, enabling true narrative optimization.</p>
+          <h3>Generate-then-Orchestrate pipeline</h3>
+          <p>Parallel scene generation decouples local quality from global coherence. A dedicated orchestration stage selects and sequences scenes by insight value and narrative logic — not greedy scene-by-scene assembly.</p>
         </div>
       </div>
-      <div class="feat">
-        <div class="feat-icon">✏️</div>
+      <div class="feat-item reveal" style="--stagger:3">
+        <div class="feat-num">04</div>
         <div class="feat-body">
-          <h3>Three editing modes</h3>
-          <p>Canvas manipulation, script editing, and natural language commands — all sharing one DVSpec state, no full regeneration.</p>
+          <h3>Three complementary editing modes</h3>
+          <p>Canvas manipulation, declarative script editing, and natural language commands all operate on a shared DVSpec state. Edits are local and incremental — full regeneration is never triggered unnecessarily.</p>
         </div>
       </div>
-      <div class="feat">
-        <div class="feat-icon">💬</div>
+      <div class="feat-item reveal" style="--stagger:4">
+        <div class="feat-num">05</div>
         <div class="feat-body">
-          <h3>Provenance-based Q&A</h3>
-          <p>Ask questions about a playing scene; the system queries the original CSV directly rather than inferring from pixels.</p>
+          <h3>Provenance-based Q&amp;A</h3>
+          <p>Ask questions about a playing scene and receive exact structured answers from the original CSV — not pixel inferences. Supports both scene-level and global video-spanning queries.</p>
         </div>
       </div>
-      <div class="feat">
-        <div class="feat-icon">🔄</div>
+      <div class="feat-item reveal" style="--stagger:5">
+        <div class="feat-num">06</div>
         <div class="feat-body">
           <h3>Exploration-to-narrative loop</h3>
-          <p>Q&A insights convert into new video scenes on the fly, closing the loop from data exploration to narrative expansion.</p>
+          <p>Convert Q&amp;A insights into new video scenes on the fly. DataMagic auto-generates the DVSpec fragment and inserts it, closing the loop from data exploration to narrative expansion.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider">
+<hr class="divider">
 
-  <!-- Architecture -->
-  <section class="sec" id="arch">
-    <div class="sec-label">Architecture</div>
-    <h2>Generate-then-Orchestrate pipeline</h2>
-    <p>DataMagic takes raw tabular datasets and natural language queries, processes them through a multi-agent engine to produce a DVSpec configuration, and compiles it into a complete narrative video. The architecture has three components: DVSpec (the intermediate representation), a two-stage multi-agent pipeline, and provenance-based interaction.</p>
+<!-- ══ ARCHITECTURE ══ -->
+<section class="sec sec--surface" id="arch">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Architecture</div>
+    <h2 class="sec-head reveal">Generate-then-Orchestrate pipeline</h2>
+    <p class="lead reveal">DataMagic processes raw tabular datasets and natural language queries through a two-stage multi-agent engine, producing a DVSpec configuration compiled into a complete narrative video.</p>
 
-    <div class="flow">
+    <div class="flow reveal">
       <span class="flow-node">CSV + Query</span>
       <span class="flow-arr">→</span>
-      <span class="flow-node">Stage 1: Candidate Gen.</span>
+      <span class="flow-node">Stage 1 — Candidate Gen.</span>
       <span class="flow-arr">→</span>
       <span class="flow-node hi">DVSpec</span>
       <span class="flow-arr">→</span>
-      <span class="flow-node">Stage 2: Orchestration</span>
+      <span class="flow-node">Stage 2 — Orchestration</span>
       <span class="flow-arr">→</span>
       <span class="flow-node">Narrative Video</span>
     </div>
 
     <div class="stage-grid">
-      <div class="stage">
+      <div class="stage reveal">
         <div class="stage-num">Stage 1</div>
         <h3>Data-driven candidate generation</h3>
         <ul>
-          <li><strong>Story Planner</strong> — decomposes query into analytical sub-tasks (trends, comparisons, distributions)</li>
-          <li><strong>Data Manager</strong> — auto-generates Python code to slice, filter, and aggregate data</li>
+          <li><strong>Story Planner</strong> — decomposes query into analytical sub-tasks: trends, comparisons, distributions</li>
+          <li><strong>Data Manager</strong> — generates Python code to slice, filter, and aggregate data for each sub-task</li>
           <li><strong>Visual Designer</strong> — designs chart type, data bindings, style; extracts insights into DVSpec content fields</li>
         </ul>
       </div>
-      <div class="stage">
+      <div class="stage reveal">
         <div class="stage-num">Stage 2</div>
         <h3>Global narrative orchestration</h3>
         <ul>
           <li><strong>Narration Director</strong> — selects scenes by insight value, orders by narrative logic (macro-to-micro)</li>
-          <li><strong>Animation Coordinator</strong> — binds data entities in narration to visual elements via semantic refs</li>
-          <li><strong>Rendering Engine</strong> — compiles DVSpec to video; TTS synthesizes narration into speech</li>
+          <li><strong>Animation Coordinator</strong> — binds data entities in narration to visual elements via semantic references</li>
+          <li><strong>Rendering Engine</strong> — compiles DVSpec to video; TTS synthesizes narration into audio</li>
         </ul>
       </div>
     </div>
 
-    <div class="fig">
-      <img src="assets/framework-1.png" alt="DataMagic system architecture">
-      <p class="fig-cap"><b>Figure 1.</b> System architecture — two-stage pipeline from raw tabular data to narrative video, with DVSpec as the structured intermediate representation.</p>
+    <div class="fig reveal">
+      <img src="assets/framework-1.png" alt="DataMagic system architecture diagram">
+      <p class="fig-cap"><strong>Fig. 1</strong> — Two-stage pipeline from raw tabular data to narrative video, with DVSpec as the structured intermediate representation.</p>
     </div>
 
-    <div class="fig">
-      <img src="assets/system_overview-1.png" alt="DataMagic web interface">
-      <p class="fig-cap"><b>Figure 2.</b> Web interface: (A) data and history panel, (B) real-time video preview, (C) scene timeline and narration editor, (D) AI-assisted editing panel with canvas manipulation (D1), provenance-based Q&A (D2), and scene generation (D3).</p>
+    <div class="fig reveal">
+      <img src="assets/system_overview-1.jpg" alt="DataMagic web interface">
+      <p class="fig-cap"><strong>Fig. 2</strong> — Web interface: (A) data and history panel, (B) real-time video preview, (C) scene timeline and narration editor, (D) AI-assisted editing panel — canvas manipulation (D1), provenance-based Q&amp;A (D2), and scene generation (D3).</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider">
+<hr class="divider">
 
-  <!-- DVSpec -->
-  <section class="sec" id="dvspec">
-    <div class="sec-label">DVSpec</div>
-    <h2>Declarative Data Video Specification</h2>
-    <p>Existing specifications such as Vega-Lite and Canis cover static charts or single-chart animations, but lack the unified cross-modal and temporal coordination needed for multi-scene data videos. DVSpec fills this gap — a structured intermediate representation that fully decouples logical description from rendering implementation.</p>
-    <p>DVSpec formalizes a data video as <em>V := (M, S)</em>, where <em>S = ⟨s₁,…,sₙ⟩</em>. Each scene is a four-tuple <em>sᵢ := (type, content, narration, animation)</em>, with <em>content</em> encapsulating chart configuration, <em>narration</em> as an ordered list of segments, and <em>animation</em> as a list of effects. DVSpec is rendering-library agnostic — the current system uses D3.js and Remotion.</p>
+<!-- ══ DVSPEC ══ -->
+<section class="sec" id="dvspec">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">DVSpec</div>
+    <h2 class="sec-head reveal">Declarative Data Video Specification</h2>
+    <p class="lead reveal">Existing specifications — Vega-Lite, Canis — cover static charts or single-chart animations, but lack unified cross-modal temporal coordination for multi-scene data videos. DVSpec fills this gap: a structured intermediate representation that fully decouples logical description from rendering implementation.</p>
 
-    <div class="props">
-      <div class="prop">
-        <h3>🔗 Data-driven semantic references</h3>
-        <p>Visual elements are referenced by data attribute values — e.g., <code style="font-size:0.8em;background:#f1f5f9;padding:1px 4px;border-radius:3px;">{"product": "4K Monitor"}</code> — not hard-coded identifiers. References stay valid across data updates and chart-type changes, ensuring every pixel traces to a CSV cell.</p>
+    <div class="props-2">
+      <div class="prop-card reveal">
+        <h3>Data-driven semantic references</h3>
+        <p>Visual elements are referenced by data attribute values — e.g., <code class="inline">{"product": "4K Monitor"}</code> — not hard-coded identifiers. References stay valid across data updates and chart-type changes, ensuring every pixel traces back to a CSV cell.</p>
       </div>
-      <div class="prop">
-        <h3>⏱ Narration-index triggering</h3>
+      <div class="prop-card reveal">
+        <h3>Narration-index triggering</h3>
         <p>Animation triggers are declared with narration segment indices, not absolute timestamps. When users edit narration text and TTS audio duration changes, the system automatically re-aligns all animation timing — no manual keyframe adjustment.</p>
       </div>
     </div>
 
-    <div class="fig" style="max-width:680px;">
+    <div class="fig reveal" style="max-width:700px">
       <img src="assets/dvspec_overview-1.png" alt="DVSpec structure and rendering flow">
-      <p class="fig-cap"><b>Figure 3.</b> DVSpec structure (a) and rendering flow (b). The specification is translated by language-specific converters into D3.js visualizations and Remotion animations.</p>
+      <p class="fig-cap"><strong>Fig. 3</strong> — DVSpec structure (a) and rendering flow (b). Translated by language-specific converters into D3.js visualizations and Remotion animations.</p>
     </div>
 
-    <div class="code-wrap">
+    <div class="code-wrap reveal">
       <div class="code-bar">
         <span class="dot dot-r"></span>
         <span class="dot dot-y"></span>
         <span class="dot dot-g"></span>
         <span class="code-fname">scene.dvspec.json</span>
       </div>
-      <pre><span class="c">// Chart scene with semantic references + narration-indexed triggers</span>
+      <pre><span class="tc">// Chart scene — semantic references + narration-indexed triggers</span>
 {
-  <span class="k">"type"</span>: <span class="s">"chart"</span>,
-  <span class="k">"content"</span>: {
-    <span class="k">"chart_type"</span>: <span class="s">"bar"</span>,
-    <span class="k">"data_bindings"</span>: { <span class="k">"x"</span>: <span class="s">"product"</span>, <span class="k">"y"</span>: <span class="s">"growth_rate"</span> }
+  <span class="tp">"type"</span>: <span class="ts">"chart"</span>,
+  <span class="tp">"content"</span>: {
+    <span class="tp">"chart_type"</span>: <span class="ts">"bar"</span>,
+    <span class="tp">"data_bindings"</span>: { <span class="tp">"x"</span>: <span class="ts">"product"</span>, <span class="tp">"y"</span>: <span class="ts">"growth_rate"</span> }
   },
-  <span class="k">"narration"</span>: [
-    <span class="s">"4K Monitor leads with 52.5% Q3-to-Q4 growth,"</span>,   <span class="c">// index 0</span>
-    <span class="s">"followed by Laptop Pro X at 52.2%."</span>               <span class="c">// index 1</span>
+  <span class="tp">"narration"</span>: [
+    <span class="ts">"4K Monitor leads with 52.5% Q3-to-Q4 growth,"</span>,   <span class="tc">// index 0</span>
+    <span class="ts">"followed by Laptop Pro X at 52.2%."</span>               <span class="tc">// index 1</span>
   ],
-  <span class="k">"animation"</span>: [
+  <span class="tp">"animation"</span>: [
     {
-      <span class="k">"type"</span>: <span class="s">"highlight"</span>,
-      <span class="k">"target"</span>: { <span class="k">"product"</span>: <span class="s">"4K Monitor"</span> },    <span class="c">// semantic ref — not a pixel coord</span>
-      <span class="k">"trigger"</span>: { <span class="k">"narration_index"</span>: <span class="n">0</span> }          <span class="c">// auto-aligns to TTS duration</span>
+      <span class="tp">"type"</span>: <span class="ts">"highlight"</span>,
+      <span class="tp">"target"</span>: { <span class="tp">"product"</span>: <span class="ts">"4K Monitor"</span> },    <span class="tc">// semantic ref — not a pixel coord</span>
+      <span class="tp">"trigger"</span>: { <span class="tp">"narration_index"</span>: <span class="tn">0</span> }          <span class="tc">// auto-aligns to TTS duration</span>
     },
     {
-      <span class="k">"type"</span>: <span class="s">"highlight"</span>,
-      <span class="k">"target"</span>: { <span class="k">"product"</span>: <span class="s">"Laptop Pro X"</span> },
-      <span class="k">"trigger"</span>: { <span class="k">"narration_index"</span>: <span class="n">1</span> }
+      <span class="tp">"type"</span>: <span class="ts">"highlight"</span>,
+      <span class="tp">"target"</span>: { <span class="tp">"product"</span>: <span class="ts">"Laptop Pro X"</span> },
+      <span class="tp">"trigger"</span>: { <span class="tp">"narration_index"</span>: <span class="tn">1</span> }
     }
   ]
 }</pre>
     </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider">
+<hr class="divider">
 
-  <!-- Results -->
-  <section class="sec" id="results">
-    <div class="sec-label">Evaluation</div>
-    <h2>Quantitative results</h2>
-    <p>Evaluated on <strong>109 real-world samples</strong> from DAComp-DA and T2R-bench. Four LLMs — DeepSeek-V3.2, Gemini-2.5-Pro, GPT-5, Claude-Sonnet-4 — serve as single-pass baselines and are also integrated into DataMagic to verify model-agnosticism. Five quality dimensions (1–5 scale); Gemini-2.5-Pro as automated judge (Pearson <em>r</em> = 0.91 vs. human experts, 60 videos).</p>
+<!-- ══ RESULTS ══ -->
+<section class="sec sec--surface" id="results">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Evaluation</div>
+    <h2 class="sec-head reveal">Quantitative results</h2>
 
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-val">3.89</div>
-        <div class="stat-label">DataMagic avg. quality<br>(out of 5)</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val warn">1.91–2.22</div>
-        <div class="stat-label">Best-LLM baselines<br>(single-pass)</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val up">95%+</div>
-        <div class="stat-label">Execution success rate<br>(vs. 48–86% baselines)</div>
-      </div>
-    </div>
-    <div class="stats-2">
-      <div class="stat">
-        <div class="stat-val up">+120%</div>
-        <div class="stat-label">Animation Effectiveness<br>1.84 → 4.03</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val up">+72%</div>
-        <div class="stat-label">Narrative Quality<br>2.00 → 3.43</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val">109</div>
-        <div class="stat-label">Real-world samples<br>evaluated</div>
-      </div>
+    <div class="prose reveal">
+      <p>We evaluate on <strong>109 real-world samples</strong> from DAComp-DA and T2R-bench, spanning business, environmental, and public-management domains. Four LLMs serve as single-pass baselines — GPT-5, Claude Sonnet 4, Gemini 2.5 Pro, and DeepSeek-V3.2. Quality is measured across five dimensions on a 1–5 scale; an automated Gemini-2.5-Pro judge achieves Pearson&nbsp;<em>r</em>&nbsp;=&nbsp;0.91 vs. human experts on 60 stratified videos.</p>
     </div>
 
-    <div class="fig">
-      <img src="assets/method_comparison-1.png" alt="Quantitative comparison">
-      <p class="fig-cap"><b>Figure 4.</b> Quantitative comparison across five quality dimensions: Intent Fulfillment, Data Insights, Narrative Quality, Animation Effectiveness, and Aesthetic Quality.</p>
+    <div class="metric-row reveal">
+      <div class="metric-cell">
+        <div class="metric-label">DataMagic quality</div>
+        <div class="metric-val pos">3.89</div>
+        <div class="metric-sub">out of 5</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Best baseline (GPT-5)</div>
+        <div class="metric-val warn">2.13</div>
+        <div class="metric-sub">single-pass</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Overall improvement</div>
+        <div class="metric-val pos">+83%</div>
+        <div class="metric-sub">over strongest LLM</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Execution rate</div>
+        <div class="metric-val pos">95%+</div>
+        <div class="metric-sub">vs. 48–86% baselines</div>
+      </div>
     </div>
 
-    <div class="note">
-      <p><strong>Main finding:</strong> Even the strongest LLMs score only 1.91–2.22 with execution rates of 48–86%. The dominant failure modes are audio-visual temporal misalignment and absence of narrative structure.</p>
-      <p>DataMagic resolves these through DVSpec's narration-index triggering and the Generate-then-Orchestrate strategy — raising the average to <strong>3.89</strong> with <strong>95%+ execution rate</strong>. Largest gains: Animation Effectiveness (+120%) and Narrative Quality (+72%). All four LLM backends benefit equally, confirming model-agnosticism.</p>
+    <div class="pull reveal">
+      <p>The two largest gains are in <strong>Animation Effectiveness</strong> (+120%, from 1.84 to 4.03) and <strong>Narrative Quality</strong> (+72%, from 2.00 to 3.43). Direct generation methods lack explicit audio-visual binding, causing animation triggers to frequently desynchronize from narration. DVSpec's narration-indexed triggering resolves this at the declarative level. Without global orchestration, models default to greedy scene-by-scene assembly that produces logical discontinuities — the Generate-then-Orchestrate strategy substantially improves coherence.</p>
     </div>
-  </section>
 
-  <hr class="divider">
+  </div>
+</section>
 
-  <!-- Demo Scenarios -->
-  <section class="sec" id="demo">
-    <div class="sec-label">Demo Scenarios</div>
-    <h2>Three interactive scenarios</h2>
-    <p>The demonstration runs through a web interface with: (A) data and history panel, (B) real-time video preview, (C) scene timeline and narration editor, (D) AI-assisted editing panel.</p>
+<hr class="divider">
 
-    <div class="scenario">
+<!-- ══ USER STUDY ══ -->
+<section class="sec sec--dark" id="userstudy">
+  <div class="sec-inner">
+    <div class="eyebrow eyebrow--amber reveal">User Study</div>
+    <h2 class="sec-head reveal">Human evaluation — <em>N</em>&thinsp;=&thinsp;12</h2>
+    <p class="lead reveal">A within-subjects study compared DataMagic against a conversational LLM workflow (Claude Sonnet 4.5 + Remotion) on three task types: attribution, evolution, and comparison. Participants were 12 Master's and early Ph.D. students from computer science, data science, finance, and business analytics. Both conditions shared the same underlying LLM and rendering stack — the key difference is DVSpec's structural constraints and the multi-agent orchestration layer.</p>
+
+    <div class="study-pair">
+      <div class="study-card reveal">
+        <div class="study-card-label">Task Completion Time</div>
+        <div class="study-big">78.6%</div>
+        <div class="study-desc">reduction in average task time — from 39.2 to 8.4 minutes (<em>z</em>&nbsp;=&nbsp;&minus;3.06, <em>p</em>&nbsp;&lt;&nbsp;.001, <em>r</em>&nbsp;=&nbsp;0.88). All 12 participants finished within the 40-min limit with DataMagic; only 7/12 managed this with the baseline.</div>
+      </div>
+      <div class="study-card reveal">
+        <div class="study-card-label">System Usability Scale (SUS)</div>
+        <div class="study-big">5.97</div>
+        <div class="study-desc">DataMagic SUS score out of 7, versus 3.22 for the baseline conversational LLM workflow. Task-specific ratings: narrative coherence (6.6 vs. 2.8) and animation effectiveness (6.3 vs. 3.0) showed the largest gaps.</div>
+      </div>
+    </div>
+
+    <div class="tlx-list reveal">
+      <div class="tlx-header">NASA-TLX — Cognitive Load &nbsp;(DataMagic vs. Baseline, lower&nbsp;=&nbsp;better, scale 1–7)</div>
+      <div class="tlx-row">
+        <span class="tlx-dim">Mental Demand</span>
+        <span class="tlx-scores"><span class="tlx-dm">3.4</span><span class="tlx-vs"> vs </span><span class="tlx-bl">5.4</span></span>
+        <span class="tlx-change">−37%</span>
+      </div>
+      <div class="tlx-row">
+        <span class="tlx-dim">Temporal Demand</span>
+        <span class="tlx-scores"><span class="tlx-dm">2.6</span><span class="tlx-vs"> vs </span><span class="tlx-bl">5.7</span></span>
+        <span class="tlx-change">−54%</span>
+      </div>
+      <div class="tlx-row">
+        <span class="tlx-dim">Effort</span>
+        <span class="tlx-scores"><span class="tlx-dm">2.7</span><span class="tlx-vs"> vs </span><span class="tlx-bl">5.4</span></span>
+        <span class="tlx-change">−50%</span>
+      </div>
+      <div class="tlx-row">
+        <span class="tlx-dim">Frustration</span>
+        <span class="tlx-scores"><span class="tlx-dm">2.0</span><span class="tlx-vs"> vs </span><span class="tlx-bl">4.8</span></span>
+        <span class="tlx-change">−58%</span>
+      </div>
+      <div class="tlx-row">
+        <span class="tlx-dim">Physical Demand</span>
+        <span class="tlx-scores"><span class="tlx-dm">2.1</span><span class="tlx-vs"> vs </span><span class="tlx-bl">3.8</span></span>
+        <span class="tlx-change">−45%</span>
+      </div>
+      <div class="tlx-row">
+        <span class="tlx-dim">Performance <em style="font-size:0.78rem;color:oklch(38% 0.01 55)">(no sig. diff.)</em></span>
+        <span class="tlx-scores"><span class="tlx-dm">5.1</span><span class="tlx-vs"> vs </span><span class="tlx-bl">4.6</span></span>
+        <span class="tlx-change" style="color:oklch(45% 0.01 55)">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEMO SCENARIOS ══ -->
+<section class="sec" id="demo">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Demo Scenarios</div>
+    <h2 class="sec-head reveal">Three interactive scenarios</h2>
+    <p class="lead reveal">The demonstration runs through a web interface with: (A) data and history panel, (B) real-time video preview, (C) scene timeline and narration editor, (D) AI-assisted editing panel.</p>
+
+    <div class="scenario reveal">
       <div class="scenario-head">
-        <span class="step-tag">Scenario 1</span>
+        <span class="scenario-tag">Scenario 1</span>
         <h3>Data-driven automated generation</h3>
       </div>
-      <p>Upload a business CSV (e.g., tech company financial reports) and enter a natural language query — <em>"Analyze Q4 revenue peaks, regional marketing efficiency, and top product profit contributors."</em> Watch the multi-agent engine execute in real time: query decomposition → parallel data slicing → chart design → narrative orchestration.</p>
-      <p>Unlike black-box generation, the system transparently displays the scene timeline, narration text, animation labels, and underlying data tables — letting you trace every visual element back to the source CSV.</p>
+      <p>Upload a business CSV and enter a natural language query — <em>"Analyze Q4 revenue peaks, regional marketing efficiency, and top product profit contributors."</em> Watch the multi-agent engine execute in real time: query decomposition → parallel data slicing → chart design → narrative orchestration.</p>
+      <p>Unlike black-box generation, the system transparently displays the scene timeline, narration text, animation labels, and underlying data tables — every visual element traceable back to the source CSV.</p>
     </div>
 
-    <div class="scenario">
+    <div class="scenario reveal">
       <div class="scenario-head">
-        <span class="step-tag">Scenario 2</span>
+        <span class="scenario-tag">Scenario 2</span>
         <h3>DVSpec-based multimodal editing</h3>
       </div>
-      <p>Refine the generated video through three modes that share a single DVSpec state — edits are local and incremental, never triggering full regeneration:</p>
+      <p>Refine the generated video through three modes sharing a single DVSpec state — edits are local and incremental, never triggering full regeneration:</p>
       <ul>
         <li><strong>Canvas direct manipulation</strong> — click a chart to open a Property Inspector; switch chart types, modify data mappings, adjust colors. All interactions map in real time to local DVSpec updates.</li>
         <li><strong>Declarative script editing</strong> — edit narration text directly in the timeline editor; when audio duration changes, animation timing re-aligns automatically.</li>
@@ -696,36 +979,38 @@
       </ul>
     </div>
 
-    <div class="scenario">
+    <div class="scenario reveal">
       <div class="scenario-head">
-        <span class="step-tag">Scenario 3</span>
-        <h3>Structured provenance-based data Q&A</h3>
+        <span class="scenario-tag">Scenario 3</span>
+        <h3>Structured provenance-based data Q&amp;A</h3>
       </div>
-      <p>Traditional video models output pixel streams and cannot understand the data behind the visuals. DVSpec preserves full semantic provenance, turning one-way videos into explorable data interfaces:</p>
+      <p>DVSpec preserves full semantic provenance, turning one-way videos into explorable data interfaces:</p>
       <ul>
         <li>Ask scene-level questions — <em>"Which product has the highest Q3-to-Q4 growth rate?"</em> — and receive exact structured answers from the original dataset (<em>4K Monitor: +52.5%; Laptop Pro X: +52.2%</em>).</li>
         <li>Ask global questions spanning the full video for multi-granularity data exploration.</li>
-        <li>Convert Q&A insights into new scenes — <em>"Add a scene showing monthly revenue trend for the top 2 growth products."</em> DataMagic auto-generates the DVSpec and inserts it, closing the exploration-to-narrative loop.</li>
+        <li>Convert Q&amp;A insights into new scenes — <em>"Add a scene showing monthly revenue trend for the top 2 growth products."</em></li>
       </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider">
+<hr class="divider">
 
-  <!-- Resources -->
-  <section class="sec" id="resources">
-    <div class="sec-label">Resources</div>
-    <h2>Paper, video &amp; code</h2>
+<!-- ══ RESOURCES ══ -->
+<section class="sec sec--surface" id="resources">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Resources</div>
+    <h2 class="sec-head reveal">Paper, video &amp; code</h2>
 
-    <div class="btns" style="justify-content:flex-start; margin-bottom:2rem;">
-      <a href="论文/vldb_demo/DataMagic Transforming Tabular Data into Data Insight Video.pdf" class="btn btn-filled">Paper PDF</a>
-      <a href="assets/DataMagic.mp4" class="btn btn-filled" download>Download Video</a>
-      <a href="https://datamagic-home.github.io/" class="btn btn-filled">Live Demo</a>
-      <a href="#" class="btn btn-outline">GitHub (coming soon)</a>
+    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem;">
+      <a href="#" class="btn btn-solid">Paper PDF</a>
+      <a href="assets/DataMagic.mp4" class="btn btn-solid" download>Download Video</a>
+      <a href="https://datamagic-home.github.io/" class="btn btn-solid">Live Demo</a>
+      <a href="#" class="btn btn-ghost">GitHub (coming soon)</a>
     </div>
 
-    <p style="font-size:0.82rem;color:var(--ink-3);margin-bottom:0.4rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">BibTeX</p>
-    <div class="cite">@inproceedings{xie2026datamagic,<br>
+    <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.5rem;" class="reveal">BibTeX</p>
+    <div class="cite reveal">@inproceedings{xie2026datamagic,<br>
 &nbsp;&nbsp;title&nbsp;&nbsp;&nbsp;&nbsp; = {DataMagic: Transforming Tabular Data into Data Insight Video},<br>
 &nbsp;&nbsp;author&nbsp;&nbsp;&nbsp; = {Xie, Yupeng and Ma, Chen and Wang, Zhenyang and Wang, Liangwei<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and Zhu, Jiayi and Zeng, Chuxuan and Shen, Zhouan<br>
@@ -733,15 +1018,42 @@
 &nbsp;&nbsp;booktitle = {Proc. VLDB Endowment (Demo Track)},<br>
 &nbsp;&nbsp;year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = {2026}<br>
 }</div>
-  </section>
-
-</div>
+  </div>
+</section>
 
 <footer>
   <p><strong>DataMagic: Transforming Tabular Data into Data Insight Video</strong></p>
-  <p>VLDB 2026 Demo &nbsp;·&nbsp; HKUST (GZ) &amp; China Unicom</p>
-  <p style="margin-top:0.8rem;"><a href="https://datamagic-home.github.io/">datamagic-home.github.io</a></p>
+  <p>VLDB 2026 Demo &nbsp;&middot;&nbsp; HKUST (GZ) &amp; China Unicom</p>
+  <hr class="footer-rule">
+  <p><a href="https://datamagic-home.github.io/">datamagic-home.github.io</a></p>
 </footer>
+
+<script>
+  // Nav color switching based on hero visibility
+  const nav  = document.getElementById('nav');
+  const hero = document.getElementById('hero');
+
+  const navObs = new IntersectionObserver(
+    ([e]) => nav.classList.toggle('scrolled', !e.isIntersecting),
+    { rootMargin: '-52px 0px 0px 0px' }
+  );
+  navObs.observe(hero);
+
+  // Scroll-reveal with stagger support
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.07, rootMargin: '0px 0px -32px 0px' }
+  );
+  reveals.forEach(el => revealObs.observe(el));
+</script>
 
 </body>
 </html>
