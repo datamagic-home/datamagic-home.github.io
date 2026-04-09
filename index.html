@@ -616,6 +616,7 @@
       <a href="#video">Video</a>
       <a href="#samples">Samples</a>
       <a href="#arch">Architecture</a>
+      <a href="#demo">Interface</a>
       <a href="#dvspec">DVSpec</a>
       <a href="#results">Results</a>
     </div>
@@ -808,7 +809,19 @@
       </div>
     </div>
 
-    <div class="fig reveal" style="margin-top:3rem;">
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══ SYSTEM INTERFACE + DEMO SCENARIOS ══ -->
+<section class="sec" id="demo">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">System Interface</div>
+    <h2 class="sec-head reveal">Three interactive scenarios</h2>
+    <p class="lead reveal">The web interface provides four panels — upload &amp; history (A), real-time video preview (B), scene timeline &amp; narration editor (C), and AI-assisted editing (D) — supporting three complementary interaction modes.</p>
+
+    <div class="fig reveal">
       <img src="assets/system_overview-1.jpg" alt="DataMagic web interface">
       <div class="fig-cap-block">
         <p class="fig-cap-title"><strong>Fig. 2 — System Interface</strong></p>
@@ -819,6 +832,41 @@
           <div class="fig-panel"><span class="panel-tag">D</span><span>AI-assisted editing — canvas manipulation (D1), provenance-based Q&amp;A (D2), scene generation (D3)</span></div>
         </div>
       </div>
+    </div>
+
+    <div class="scenario reveal" style="margin-top:3rem;">
+      <div class="scenario-head">
+        <span class="scenario-tag">Scenario 1</span>
+        <h3>Data-driven automated generation</h3>
+      </div>
+      <p>Upload a business CSV and enter a natural language query — <em>"Analyze Q4 revenue peaks, regional marketing efficiency, and top product profit contributors."</em> Watch the multi-agent engine execute in real time: query decomposition → parallel data slicing → chart design → narrative orchestration.</p>
+      <p>Unlike black-box generation, the system transparently displays the scene timeline, narration text, animation labels, and underlying data tables — every visual element traceable back to the source CSV.</p>
+    </div>
+
+    <div class="scenario reveal">
+      <div class="scenario-head">
+        <span class="scenario-tag">Scenario 2</span>
+        <h3>DVSpec-based multimodal editing</h3>
+      </div>
+      <p>Refine the generated video through three modes sharing a single DVSpec state — edits are local and incremental, never triggering full regeneration:</p>
+      <ul>
+        <li><strong>Canvas direct manipulation</strong> — click a chart to open a Property Inspector; switch chart types, modify data mappings, adjust colors. All interactions map in real time to local DVSpec updates.</li>
+        <li><strong>Declarative script editing</strong> — edit narration text directly in the timeline editor; when audio duration changes, animation timing re-aligns automatically.</li>
+        <li><strong>Natural language commands</strong> — type <em>"@Scene 4: change to treemap and highlight top product."</em> The system parses and triggers incremental re-rendering of that scene only.</li>
+      </ul>
+    </div>
+
+    <div class="scenario reveal">
+      <div class="scenario-head">
+        <span class="scenario-tag">Scenario 3</span>
+        <h3>Structured provenance-based data Q&amp;A</h3>
+      </div>
+      <p>DVSpec preserves full semantic provenance, turning one-way videos into explorable data interfaces:</p>
+      <ul>
+        <li>Ask scene-level questions — <em>"Which product has the highest Q3-to-Q4 growth rate?"</em> — and receive exact structured answers from the original dataset (<em>4K Monitor: +52.5%; Laptop Pro X: +52.2%</em>).</li>
+        <li>Ask global questions spanning the full video for multi-granularity data exploration.</li>
+        <li>Convert Q&amp;A insights into new scenes — <em>"Add a scene showing monthly revenue trend for the top 2 growth products."</em></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -979,50 +1027,6 @@
         <span class="tlx-scores"><span class="tlx-dm">5.1</span><span class="tlx-vs"> vs </span><span class="tlx-bl">4.6</span></span>
         <span class="tlx-change" style="color:oklch(45% 0.01 55)">—</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ DEMO SCENARIOS ══ -->
-<section class="sec" id="demo">
-  <div class="sec-inner">
-    <div class="eyebrow reveal">Demo Scenarios</div>
-    <h2 class="sec-head reveal">Three interactive scenarios</h2>
-    <p class="lead reveal">The demonstration runs through a web interface with: (A) data and history panel, (B) real-time video preview, (C) scene timeline and narration editor, (D) AI-assisted editing panel.</p>
-
-    <div class="scenario reveal">
-      <div class="scenario-head">
-        <span class="scenario-tag">Scenario 1</span>
-        <h3>Data-driven automated generation</h3>
-      </div>
-      <p>Upload a business CSV and enter a natural language query — <em>"Analyze Q4 revenue peaks, regional marketing efficiency, and top product profit contributors."</em> Watch the multi-agent engine execute in real time: query decomposition → parallel data slicing → chart design → narrative orchestration.</p>
-      <p>Unlike black-box generation, the system transparently displays the scene timeline, narration text, animation labels, and underlying data tables — every visual element traceable back to the source CSV.</p>
-    </div>
-
-    <div class="scenario reveal">
-      <div class="scenario-head">
-        <span class="scenario-tag">Scenario 2</span>
-        <h3>DVSpec-based multimodal editing</h3>
-      </div>
-      <p>Refine the generated video through three modes sharing a single DVSpec state — edits are local and incremental, never triggering full regeneration:</p>
-      <ul>
-        <li><strong>Canvas direct manipulation</strong> — click a chart to open a Property Inspector; switch chart types, modify data mappings, adjust colors. All interactions map in real time to local DVSpec updates.</li>
-        <li><strong>Declarative script editing</strong> — edit narration text directly in the timeline editor; when audio duration changes, animation timing re-aligns automatically.</li>
-        <li><strong>Natural language commands</strong> — type <em>"@Scene 4: change to treemap and highlight top product."</em> The system parses and triggers incremental re-rendering of that scene only.</li>
-      </ul>
-    </div>
-
-    <div class="scenario reveal">
-      <div class="scenario-head">
-        <span class="scenario-tag">Scenario 3</span>
-        <h3>Structured provenance-based data Q&amp;A</h3>
-      </div>
-      <p>DVSpec preserves full semantic provenance, turning one-way videos into explorable data interfaces:</p>
-      <ul>
-        <li>Ask scene-level questions — <em>"Which product has the highest Q3-to-Q4 growth rate?"</em> — and receive exact structured answers from the original dataset (<em>4K Monitor: +52.5%; Laptop Pro X: +52.2%</em>).</li>
-        <li>Ask global questions spanning the full video for multi-granularity data exploration.</li>
-        <li>Convert Q&amp;A insights into new scenes — <em>"Add a scene showing monthly revenue trend for the top 2 growth products."</em></li>
-      </ul>
     </div>
   </div>
 </section>
