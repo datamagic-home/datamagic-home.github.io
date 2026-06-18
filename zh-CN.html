@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DataMagic — Transforming Tabular Data into Data Insight Video</title>
+  <title>DataMagic — 数据洞察视频生成</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -613,14 +613,14 @@
   <div class="nav-inner">
     <a class="nav-logo" href="#"><em>Data</em>Magic</a>
     <div class="nav-links">
-      <a href="#overview">Overview</a>
-      <a href="#workflows">Workflows</a>
-      <a href="#video">Video</a>
-      <a href="#examples">Examples</a>
-      <a href="#templates">Templates</a>
+      <a href="#overview">概览</a>
+      <a href="#workflows">生成方式</a>
+      <a href="#video">演示</a>
+      <a href="#examples">案例</a>
+      <a href="#templates">模板</a>
       <a href="#dvspec">DVSpec</a>
-      <a href="#community">Community</a>
-      <a href="zh-CN.html">中文</a>
+      <a href="#community">社区</a>
+      <a href="index.html">EN</a>
     </div>
   </div>
 </nav>
@@ -630,21 +630,21 @@
   <div class="hero-inner">
     <div class="venue-badge">VLDB 2026 &thinsp;&middot;&thinsp; Demo Paper</div>
     <h1 class="hero-title">
-      <em>DataMagic</em>: Turn<br>
-      Structured Data into<br>
-      Narrated Video
+      <em>DataMagic</em>: 把<br>
+      结构化数据变成<br>
+      动态叙事视频
     </h1>
     <div class="hero-meta">
       <div class="hero-authors">
-        <div class="meta-label">About</div>
+        <div class="meta-label">关于</div>
         <div class="hero-names">
-          Upload a table, describe the story, and generate an animated data video with AI planning, template recommendation, editable scenes, and data-grounded rendering.
+          上传表格，描述想讲清楚的数据故事，DataMagic 会通过 AI 规划、模板推荐、可编辑场景和数据绑定渲染生成动态数据视频。
         </div>
-        <div class="hero-affil">Live product &nbsp;&middot;&nbsp; VLDB 2026 Demo &nbsp;&middot;&nbsp; Source code in progress</div>
+        <div class="hero-affil">在线可用 &nbsp;&middot;&nbsp; VLDB 2026 Demo &nbsp;&middot;&nbsp; 源代码逐步开放中</div>
       </div>
       <div class="hero-btns">
-        <a href="#video" class="btn btn-amber">&#9654;&thinsp; Demo Video</a>
-        <a href="http://xyp.47.86.187.166.sslip.io/" class="btn btn-ghost-light">Try It Now</a>
+        <a href="#video" class="btn btn-amber">&#9654;&thinsp; 演示视频</a>
+        <a href="http://xyp.47.86.187.166.sslip.io/" class="btn btn-ghost-light">在线试用</a>
         <a href="https://github.com/xypkent/DataMagicCode" class="btn btn-ghost-light">GitHub</a>
       </div>
     </div>
@@ -656,12 +656,12 @@
 <!-- ══ OVERVIEW ══ -->
 <section class="sec" id="overview">
   <div class="sec-inner">
-    <div class="eyebrow reveal">Overview</div>
-    <h2 class="sec-head reveal">From raw table to shareable<br><em>data story</em></h2>
+    <div class="eyebrow reveal">概览</div>
+    <h2 class="sec-head reveal">从原始表格到可分享的<br><em>数据故事</em></h2>
     <div class="prose reveal">
-      <p><strong>DataMagic</strong> is an interactive system for turning tabular data into narrated, animated, and editable data insight videos. It is designed for analysts, researchers, and teams who need data to become a story rather than a static chart.</p>
-      <p>The system supports three practical paths: a complete multi-scene pipeline, a faster generation mode for quick reports, and <strong>Single Chart</strong> for one focused animated visualization. Users can preview results, refine text and visuals, and export real MP4 videos.</p>
-      <p>Under the hood, <strong>DVSpec</strong> keeps visual elements tied to source data fields and aligns animation timing with narration, so the result stays traceable, editable, and suitable for data communication.</p>
+      <p><strong>DataMagic</strong> 是一个交互式系统，用于把表格数据转成带旁白、动画和可编辑结构的数据洞察视频。它面向分析师、研究人员和需要把数据讲成故事的团队。</p>
+      <p>系统支持三种实用路径：完整的多场景生成流程、面向快速报告的快速生成模式，以及用于单个动态图表的 <strong>Single Chart</strong>。用户可以预览结果、修改文本和视觉效果，并导出真实 MP4 视频。</p>
+      <p>在底层，<strong>DVSpec</strong> 会把视觉元素和源数据字段绑定，并让动画时序与旁白内容对齐，使生成结果可追溯、可编辑，也更适合数据传播。</p>
     </div>
   </div>
 </section>
@@ -671,38 +671,38 @@
 <!-- ══ WORKFLOWS ══ -->
 <section class="sec sec--surface" id="workflows">
   <div class="sec-inner">
-    <div class="eyebrow reveal">Workflows</div>
-    <h2 class="sec-head reveal">Choose the right generation path</h2>
-    <p class="lead reveal">DataMagic supports both complete data-story videos and lightweight chart generation, depending on how much structure and speed the task needs.</p>
+    <div class="eyebrow reveal">生成方式</div>
+    <h2 class="sec-head reveal">根据任务选择合适的生成路径</h2>
+    <p class="lead reveal">DataMagic 同时支持完整的数据故事视频和轻量的动态图表生成，可以根据任务所需的结构完整度和速度进行选择。</p>
 
     <div class="stage-grid">
       <div class="stage reveal" style="--stagger:0">
-        <div class="stage-num">Full Pipeline</div>
-        <h3>Narrated multi-scene data videos</h3>
+        <div class="stage-num">完整流程</div>
+        <h3>多场景叙事数据视频</h3>
         <ul>
-          <li>Upload a CSV or Excel table and describe the analytical goal</li>
-          <li>AI plans scenes, chart choices, narration, and visual pacing</li>
-          <li>Best for business reports, research summaries, and presentations</li>
+          <li>上传 CSV 或 Excel 表格，并描述分析目标</li>
+          <li>AI 规划场景、图表选择、旁白和视觉节奏</li>
+          <li>适合商业报告、研究总结和正式展示</li>
         </ul>
       </div>
       <div class="stage reveal" style="--stagger:1">
-        <div class="stage-num">Fast Generation</div>
-        <h3>Complete video with faster turnaround</h3>
+        <div class="stage-num">快速生成</div>
+        <h3>更快得到完整视频</h3>
         <ul>
-          <li>Keeps AI planning and narration, but uses optimized rendering paths</li>
-          <li>Good for recurring reports, drafts, and quick review cycles</li>
-          <li>Balances speed with a coherent generated story</li>
+          <li>保留 AI 规划和旁白，但使用更快的渲染路径</li>
+          <li>适合周期性报告、草稿和快速评审</li>
+          <li>在生成速度和叙事完整性之间取得平衡</li>
         </ul>
       </div>
     </div>
     <div class="stage-grid" style="grid-template-columns:1fr;">
       <div class="stage reveal" style="--stagger:2">
         <div class="stage-num">Single Chart</div>
-        <h3>One focused animated visualization</h3>
+        <h3>一个聚焦的动态图表</h3>
         <ul>
-          <li>Paste or upload a small table and describe the desired chart</li>
-          <li>AI recommends suitable templates and styles before generation</li>
-          <li>Best for slide decks, quick sharing, and one-off data explanations</li>
+          <li>粘贴或上传小表格，并描述想生成的图表</li>
+          <li>AI 在生成前推荐合适的模板和风格</li>
+          <li>适合幻灯片、快速分享和单个数据点说明</li>
         </ul>
       </div>
     </div>
@@ -714,8 +714,8 @@
 <!-- ══ DEMO VIDEO ══ -->
 <section class="sec sec--dark sec--mid" id="video">
   <div class="sec-inner">
-    <div class="eyebrow eyebrow--amber reveal">Demo Video</div>
-    <h2 class="sec-head reveal">System walkthrough</h2>
+    <div class="eyebrow eyebrow--amber reveal">演示视频</div>
+    <h2 class="sec-head reveal">系统流程演示</h2>
     <div class="video-frame reveal">
       <video controls preload="metadata" src="video/DataMagic_Demo.mp4"></video>
     </div>
@@ -725,33 +725,33 @@
 <!-- ══ SAMPLE OUTPUTS ══ -->
 <section class="sec sec--surface" id="examples">
   <div class="sec-inner">
-    <div class="eyebrow reveal">Examples</div>
-    <h2 class="sec-head reveal">Generated data stories</h2>
-    <p class="lead reveal">Representative outputs across business, energy, and technology datasets. Each example is a real video generated from structured data and a natural-language intent.</p>
+    <div class="eyebrow reveal">案例</div>
+    <h2 class="sec-head reveal">生成的数据故事</h2>
+    <p class="lead reveal">这些案例覆盖商业、能源和科技数据集。每个案例都来自结构化数据和自然语言意图，并生成真实视频。</p>
     <div class="video-gallery">
       <div class="reveal">
         <div class="video-card-inner">
           <video controls preload="metadata" src="video/SampleOutput_Q4_Performance_and_Marketing_Insights.mp4"></video>
         </div>
-        <div class="video-card-label"><strong>Q4 sales analysis</strong><br>Animated bar and trend visualization for business performance insights.</div>
+        <div class="video-card-label"><strong>Q4 销售分析</strong><br>基于业务表现洞察的动态柱状图和趋势可视化。</div>
       </div>
       <div class="reveal" style="--stagger:1">
         <div class="video-card-inner">
           <video controls preload="metadata" src="video/Renewable-Energy.mp4"></video>
         </div>
-        <div class="video-card-label"><strong>Renewable energy transition</strong><br>A narrated look at renewable capacity growth from 2018 to 2024.</div>
+        <div class="video-card-label"><strong>可再生能源转型</strong><br>展示 2018 到 2024 年可再生能源容量增长。</div>
       </div>
       <div class="reveal" style="--stagger:2">
         <div class="video-card-inner">
           <video controls preload="metadata" src="video/Tech-Revenue.mp4"></video>
         </div>
-        <div class="video-card-label"><strong>2024 tech revenue leaders</strong><br>A comparison of major technology companies by 2024 revenue.</div>
+        <div class="video-card-label"><strong>2024 科技营收排行</strong><br>对比主要科技公司 2024 年营收规模。</div>
       </div>
       <div class="reveal" style="--stagger:3">
         <div class="video-card-inner">
           <video controls preload="metadata" src="video/Tech-Growth.mp4"></video>
         </div>
-        <div class="video-card-label"><strong>Tech growth and market momentum</strong><br>An executive-style recap of 2024 tech performance and growth momentum.</div>
+        <div class="video-card-label"><strong>科技增长与市场动能</strong><br>以高管汇报风格回顾 2024 年科技表现和增长趋势。</div>
       </div>
     </div>
   </div>
@@ -762,12 +762,12 @@
 <!-- ══ TEMPLATE GALLERY ══ -->
 <section class="sec" id="templates">
   <div class="sec-inner">
-    <div class="eyebrow reveal">Template Gallery</div>
-    <h2 class="sec-head reveal">Preview visual styles before generation</h2>
-    <p class="lead reveal">DataMagic includes more than 100 ready-made visual styles across bar, line, pie, scatter, Sankey, waterfall, KPI card, and narrative scenes. Template recommendation helps match the data shape and communication goal before rendering begins.</p>
+    <div class="eyebrow reveal">模板库</div>
+    <h2 class="sec-head reveal">生成前预览视觉风格</h2>
+    <p class="lead reveal">DataMagic 包含 100 多种视觉模板，覆盖柱状图、折线图、饼图、散点图、桑基图、瀑布图、KPI 卡片和叙事场景。模板推荐会在渲染前根据数据形态和表达目标匹配合适风格。</p>
     <div class="fig reveal">
       <img src="assets/template-gallery.png" alt="DataMagic template gallery">
-      <p class="fig-cap"><strong>Template Gallery</strong> — browse, preview, and mark preferred visual styles before generating a video or Single Chart.</p>
+      <p class="fig-cap"><strong>模板库</strong> — 在生成视频或 Single Chart 前浏览、预览并标记偏好的视觉风格。</p>
     </div>
   </div>
 </section>
@@ -777,49 +777,49 @@
 <!-- ══ FEATURES ══ -->
 <section class="sec" id="features">
   <div class="sec-inner">
-    <div class="eyebrow reveal">Highlights</div>
-    <h2 class="sec-head reveal">What DataMagic brings<br>to the table</h2>
+    <div class="eyebrow reveal">功能亮点</div>
+    <h2 class="sec-head reveal">DataMagic 提供的核心能力</h2>
     <div class="feat-list">
       <div class="feat-item reveal" style="--stagger:0">
         <div class="feat-num">01</div>
         <div class="feat-body">
-          <h3>Full data-to-video generation</h3>
-          <p>Generate presentation-ready data videos from uploaded tabular data, including scene planning, chart selection, narration, animation, and export.</p>
+          <h3>完整的数据到视频生成</h3>
+          <p>从上传的表格数据生成可用于展示的数据视频，包括场景规划、图表选择、旁白、动画和导出。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:1">
         <div class="feat-num">02</div>
         <div class="feat-body">
-          <h3>Fast runtime generation</h3>
-          <p>Use optimized generation and rendering paths when speed matters, while still keeping AI-assisted planning and narrative structure.</p>
+          <h3>快速运行时生成</h3>
+          <p>在速度优先的场景下使用优化过的生成和渲染路径，同时保留 AI 辅助规划和叙事结构。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:2">
         <div class="feat-num">03</div>
         <div class="feat-body">
-          <h3>Single Chart mode</h3>
-          <p>Paste or upload data and quickly generate one animated visualization without running the full multi-scene story pipeline.</p>
+          <h3>Single Chart 模式</h3>
+          <p>粘贴或上传数据后快速生成一个动态图表，无需运行完整的多场景故事流程。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:3">
         <div class="feat-num">04</div>
         <div class="feat-body">
-          <h3>Template recommendation</h3>
-          <p>AI recommends chart types and style templates from the gallery based on the data columns, analytical goal, and desired communication style.</p>
+          <h3>模板推荐</h3>
+          <p>AI 根据数据列、分析目标和表达风格，从模板库中推荐图表类型和视觉模板。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:4">
         <div class="feat-num">05</div>
         <div class="feat-body">
-          <h3>Runtime preview and editing</h3>
-          <p>Preview generated videos, edit text directly, refine with natural language, and keep updates local where possible instead of regenerating everything.</p>
+          <h3>运行时预览和编辑</h3>
+          <p>预览生成视频，直接编辑文本，用自然语言调整内容，并尽可能局部更新而不是整体重生成。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:5">
         <div class="feat-num">06</div>
         <div class="feat-body">
-          <h3>Data-grounded scenes</h3>
-          <p>Visual elements are bound to underlying data fields through DVSpec, making generated stories easier to inspect, revise, and trust.</p>
+          <h3>数据绑定场景</h3>
+          <p>视觉元素通过 DVSpec 与底层数据字段绑定，让生成故事更容易检查、修改和信任。</p>
         </div>
       </div>
     </div>
@@ -831,44 +831,44 @@
 <!-- ══ ARCHITECTURE ══ -->
 <section class="sec sec--surface" id="arch">
   <div class="sec-inner">
-    <div class="eyebrow reveal">Architecture</div>
-    <h2 class="sec-head reveal">Generate-then-Orchestrate pipeline</h2>
-    <p class="lead reveal">DataMagic processes raw tabular datasets and natural language queries through a two-stage multi-agent engine, producing a DVSpec configuration compiled into a complete narrative video.</p>
+    <div class="eyebrow reveal">系统架构</div>
+    <h2 class="sec-head reveal">Generate-then-Orchestrate 流程</h2>
+    <p class="lead reveal">DataMagic 通过两阶段多智能体引擎处理原始表格数据和自然语言查询，生成 DVSpec 配置，并编译为完整叙事视频。</p>
 
     <div class="flow reveal">
-      <span class="flow-node">CSV + Query</span>
+      <span class="flow-node">CSV + 查询</span>
       <span class="flow-arr">→</span>
-      <span class="flow-node">Stage 1 — Candidate Gen.</span>
+      <span class="flow-node">阶段 1 — 候选生成</span>
       <span class="flow-arr">→</span>
       <span class="flow-node hi">DVSpec</span>
       <span class="flow-arr">→</span>
-      <span class="flow-node">Stage 2 — Orchestration</span>
+      <span class="flow-node">阶段 2 — 全局编排</span>
       <span class="flow-arr">→</span>
-      <span class="flow-node">Narrative Video</span>
+      <span class="flow-node">叙事视频</span>
     </div>
 
     <div class="fig reveal">
       <img src="assets/framework-1.png" alt="DataMagic system architecture diagram">
-      <p class="fig-cap"><strong>Fig. 1</strong> — Two-stage pipeline from raw tabular data to narrative video, with DVSpec as the structured intermediate representation.</p>
+      <p class="fig-cap"><strong>图 1</strong> — 从原始表格数据到叙事视频的两阶段流程，DVSpec 作为结构化中间表示。</p>
     </div>
 
     <div class="stage-grid">
       <div class="stage reveal">
-        <div class="stage-num">Stage 1</div>
-        <h3>Data-driven candidate generation</h3>
+        <div class="stage-num">阶段 1</div>
+        <h3>数据驱动的候选生成</h3>
         <ul>
-          <li><strong>Story Planner</strong> — decomposes query into analytical sub-tasks: trends, comparisons, distributions</li>
-          <li><strong>Data Manager</strong> — generates Python code to slice, filter, and aggregate data for each sub-task</li>
-          <li><strong>Visual Designer</strong> — designs chart type, data bindings, style; extracts insights into DVSpec content fields</li>
+          <li><strong>故事规划器</strong> — 将查询拆解为趋势、对比、分布等分析子任务</li>
+          <li><strong>数据管理器</strong> — 生成 Python 代码，对数据进行切片、筛选和聚合</li>
+          <li><strong>视觉设计器</strong> — 设计图表类型、数据绑定和视觉风格，并抽取洞察写入 DVSpec</li>
         </ul>
       </div>
       <div class="stage reveal">
-        <div class="stage-num">Stage 2</div>
-        <h3>Global narrative orchestration</h3>
+        <div class="stage-num">阶段 2</div>
+        <h3>全局叙事编排</h3>
         <ul>
-          <li><strong>Narration Director</strong> — selects scenes by insight value, orders by narrative logic (macro-to-micro)</li>
-          <li><strong>Animation Coordinator</strong> — binds data entities in narration to visual elements via semantic references</li>
-          <li><strong>Rendering Engine</strong> — compiles DVSpec to video; TTS synthesizes narration into audio</li>
+          <li><strong>旁白导演</strong> — 根据洞察价值选择场景，并按叙事逻辑排序</li>
+          <li><strong>动画协调器</strong> — 通过语义引用把旁白中的数据实体绑定到视觉元素</li>
+          <li><strong>渲染引擎</strong> — 将 DVSpec 编译为视频，并通过 TTS 合成旁白音频</li>
         </ul>
       </div>
     </div>
@@ -881,55 +881,55 @@
 <!-- ══ SYSTEM INTERFACE + DEMO SCENARIOS ══ -->
 <section class="sec" id="demo">
   <div class="sec-inner">
-    <div class="eyebrow reveal">System Interface</div>
-    <h2 class="sec-head reveal">Three interactive scenarios</h2>
-    <p class="lead reveal">The web interface provides four panels — upload &amp; history (A), real-time video preview (B), scene timeline &amp; narration editor (C), and AI-assisted editing (D) — supporting three complementary interaction modes.</p>
+    <div class="eyebrow reveal">系统界面</div>
+    <h2 class="sec-head reveal">三个交互场景</h2>
+    <p class="lead reveal">Web 界面包含上传与历史记录、实时视频预览、场景时间线与旁白编辑，以及 AI 辅助编辑等区域，支持生成、修改和数据问答。</p>
 
     <div class="fig reveal">
       <img src="assets/system_overview-1.jpg" alt="DataMagic web interface">
       <div class="fig-cap-block">
-        <p class="fig-cap-title"><strong>Fig. 2 — System Interface</strong></p>
+        <p class="fig-cap-title"><strong>图 2 — 系统界面</strong></p>
         <div class="fig-panels">
-          <div class="fig-panel"><span class="panel-tag">A</span><span>Data upload &amp; history panel</span></div>
-          <div class="fig-panel"><span class="panel-tag">B</span><span>Real-time video preview</span></div>
-          <div class="fig-panel"><span class="panel-tag">C</span><span>Scene timeline &amp; narration editor</span></div>
-          <div class="fig-panel"><span class="panel-tag">D</span><span>AI-assisted editing — canvas manipulation (D1), provenance-based Q&amp;A (D2), scene generation (D3)</span></div>
+          <div class="fig-panel"><span class="panel-tag">A</span><span>数据上传与历史记录</span></div>
+          <div class="fig-panel"><span class="panel-tag">B</span><span>实时视频预览</span></div>
+          <div class="fig-panel"><span class="panel-tag">C</span><span>场景时间线与旁白编辑</span></div>
+          <div class="fig-panel"><span class="panel-tag">D</span><span>AI 辅助编辑，包括画布操作、数据问答和场景生成</span></div>
         </div>
       </div>
     </div>
 
     <div class="scenario reveal" style="margin-top:3rem;">
       <div class="scenario-head">
-        <span class="scenario-tag">Scenario 1</span>
-        <h3>Data-driven automated generation</h3>
+        <span class="scenario-tag">场景 1</span>
+        <h3>数据驱动的自动生成</h3>
       </div>
-      <p>Upload a business CSV and enter a natural language query — <em>"Analyze Q4 revenue peaks, regional marketing efficiency, and top product profit contributors."</em> Watch the multi-agent engine execute in real time: query decomposition → parallel data slicing → chart design → narrative orchestration.</p>
-      <p>Unlike black-box generation, the system transparently displays the scene timeline, narration text, animation labels, and underlying data tables — every visual element traceable back to the source CSV.</p>
+      <p>上传业务 CSV 并输入自然语言查询，例如 <em>“分析 Q4 收入峰值、区域营销效率和主要利润贡献产品。”</em> 系统会执行查询拆解、数据切片、图表设计和叙事编排。</p>
+      <p>与黑盒生成不同，DataMagic 会展示场景时间线、旁白文本、动画标签和底层数据表，使每个视觉元素都可以追溯到源数据。</p>
     </div>
 
     <div class="scenario reveal">
       <div class="scenario-head">
-        <span class="scenario-tag">Scenario 2</span>
-        <h3>DVSpec-based multimodal editing</h3>
+        <span class="scenario-tag">场景 2</span>
+        <h3>基于 DVSpec 的多模态编辑</h3>
       </div>
-      <p>Refine the generated video through three modes sharing a single DVSpec state — edits are local and incremental, never triggering full regeneration:</p>
+      <p>用户可以通过共享同一 DVSpec 状态的多种方式修改视频。编辑尽量局部生效，避免不必要的完整重生成：</p>
       <ul>
-        <li><strong>Canvas direct manipulation</strong> — click a chart to open a Property Inspector; switch chart types, modify data mappings, adjust colors. All interactions map in real time to local DVSpec updates.</li>
-        <li><strong>Declarative script editing</strong> — edit narration text directly in the timeline editor; when audio duration changes, animation timing re-aligns automatically.</li>
-        <li><strong>Natural language commands</strong> — type <em>"@Scene 4: change to treemap and highlight top product."</em> The system parses and triggers incremental re-rendering of that scene only.</li>
+        <li><strong>画布直接操作</strong> — 点击图表打开属性面板，切换图表类型、修改数据映射或调整颜色。</li>
+        <li><strong>声明式文本编辑</strong> — 在时间线编辑旁白文本，音频时长变化后动画时序会自动重新对齐。</li>
+        <li><strong>自然语言命令</strong> — 例如输入 <em>“把第 4 个场景改成树图并突出最高产品。”</em>，系统解析后只增量更新对应场景。</li>
       </ul>
     </div>
 
     <div class="scenario reveal">
       <div class="scenario-head">
-        <span class="scenario-tag">Scenario 3</span>
-        <h3>Structured provenance-based data Q&amp;A</h3>
+        <span class="scenario-tag">场景 3</span>
+        <h3>基于数据溯源的问答</h3>
       </div>
-      <p>DVSpec preserves full semantic provenance, turning one-way videos into explorable data interfaces:</p>
+      <p>DVSpec 保留完整语义溯源，使视频不只是单向播放内容，也可以成为可探索的数据界面：</p>
       <ul>
-        <li>Ask scene-level questions — <em>"Which product has the highest Q3-to-Q4 growth rate?"</em> — and receive exact structured answers from the original dataset (<em>4K Monitor: +52.5%; Laptop Pro X: +52.2%</em>).</li>
-        <li>Ask global questions spanning the full video for multi-granularity data exploration.</li>
-        <li>Convert Q&amp;A insights into new scenes — <em>"Add a scene showing monthly revenue trend for the top 2 growth products."</em></li>
+        <li>询问当前场景问题，例如 <em>“哪个产品 Q3 到 Q4 增长率最高？”</em>，系统会从原始数据中返回结构化答案。</li>
+        <li>询问跨越整个视频的全局问题，支持多粒度数据探索。</li>
+        <li>将问答得到的新洞察转成新场景，例如 <em>“添加一个场景展示增长最高两个产品的月度收入趋势。”</em></li>
       </ul>
     </div>
   </div>
@@ -941,23 +941,23 @@
 <section class="sec" id="dvspec">
   <div class="sec-inner">
     <div class="eyebrow reveal">DVSpec</div>
-    <h2 class="sec-head reveal">Declarative Data Video Specification</h2>
-    <p class="lead reveal">Existing specifications — Vega-Lite, Canis — cover static charts or single-chart animations, but lack unified cross-modal temporal coordination for multi-scene data videos. DVSpec fills this gap: a structured intermediate representation that fully decouples logical description from rendering implementation.</p>
+    <h2 class="sec-head reveal">声明式数据视频规范</h2>
+    <p class="lead reveal">DVSpec 是 DataMagic 的结构化中间表示，用于连接数据、视觉元素、旁白和动画时序。它让逻辑描述与渲染实现解耦，也让生成结果可以被检查和编辑。</p>
 
     <div class="props-2">
       <div class="prop-card reveal">
-        <h3>Data-driven semantic references</h3>
-        <p>Visual elements are referenced by data attribute values — e.g., <code class="inline">{"product": "4K Monitor"}</code> — not hard-coded identifiers. References stay valid across data updates and chart-type changes, ensuring every pixel traces back to a CSV cell.</p>
+        <h3>数据驱动的语义引用</h3>
+        <p>视觉元素通过数据属性值引用，例如 <code class="inline">{"product": "4K Monitor"}</code>，而不是依赖硬编码坐标或临时 ID。这样图表变化后仍能保持数据溯源。</p>
       </div>
       <div class="prop-card reveal">
-        <h3>Narration-index triggering</h3>
-        <p>Animation triggers are declared with narration segment indices, not absolute timestamps. When users edit narration text and TTS audio duration changes, the system automatically re-aligns all animation timing — no manual keyframe adjustment.</p>
+        <h3>旁白索引触发</h3>
+        <p>动画触发基于旁白片段索引，而不是固定时间戳。当用户修改旁白文本导致音频时长变化时，系统可以重新对齐动画时序。</p>
       </div>
     </div>
 
     <div class="fig reveal" style="max-width:700px">
       <img src="assets/dvspec_overview-1.png" alt="DVSpec structure and rendering flow">
-      <p class="fig-cap"><strong>Fig. 3</strong> — DVSpec structure (a) and rendering flow (b). Translated by language-specific converters into D3.js visualizations and Remotion animations.</p>
+      <p class="fig-cap"><strong>图 3</strong> — DVSpec 结构与渲染流程，可被转换为 D3.js 可视化和 Remotion 动画。</p>
     </div>
 
     <div class="code-wrap reveal">
@@ -1001,36 +1001,36 @@
 <section class="sec sec--surface" id="roadmap">
   <div class="sec-inner">
     <div class="eyebrow reveal">Roadmap</div>
-    <h2 class="sec-head reveal">Current status and next steps</h2>
-    <p class="lead reveal">DataMagic is live and will be progressively open-sourced with more implementation notes, datasets, and template examples.</p>
+    <h2 class="sec-head reveal">当前状态与下一步计划</h2>
+    <p class="lead reveal">DataMagic 已经在线可用，后续会逐步开放更多源代码、实现说明、数据集和模板案例。</p>
 
     <div class="feat-list">
       <div class="feat-item reveal" style="--stagger:0">
         <div class="feat-num">✓</div>
         <div class="feat-body">
-          <h3>Full Pipeline, Fast Generation, and Single Chart</h3>
-          <p>The core generation modes are available for multi-scene videos, faster report generation, and one focused animated chart.</p>
+          <h3>完整流程、快速生成和 Single Chart</h3>
+          <p>核心生成模式已经可用，分别面向多场景视频、更快的报告生成和单个动态图表。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:1">
         <div class="feat-num">✓</div>
         <div class="feat-body">
-          <h3>Template gallery and runtime preview</h3>
-          <p>Users can browse visual styles, preview generated videos, edit text, and refine output through natural-language interaction.</p>
+          <h3>模板库和运行时预览</h3>
+          <p>用户可以浏览视觉风格、预览生成视频、编辑文本，并通过自然语言继续优化结果。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:2">
         <div class="feat-num">→</div>
         <div class="feat-body">
-          <h3>More public source code and implementation notes</h3>
-          <p>We are preparing more documentation around the pipeline, DVSpec, template adapters, and deployment workflow.</p>
+          <h3>更多公开源代码和实现说明</h3>
+          <p>我们正在准备围绕生成流程、DVSpec、模板适配器和部署流程的更多文档。</p>
         </div>
       </div>
       <div class="feat-item reveal" style="--stagger:3">
         <div class="feat-num">→</div>
         <div class="feat-body">
-          <h3>Stronger template recommendation and feedback learning</h3>
-          <p>Upcoming work focuses on improving style selection, learning from user feedback, and expanding examples and benchmark cases.</p>
+          <h3>更强的模板推荐和反馈学习</h3>
+          <p>后续重点会放在提升风格选择、从用户反馈中学习，以及扩展示例和评测案例。</p>
         </div>
       </div>
     </div>
@@ -1042,30 +1042,30 @@
 <!-- ══ COMMUNITY ══ -->
 <section class="sec sec--dark" id="community">
   <div class="sec-inner">
-    <div class="eyebrow eyebrow--amber reveal">Community</div>
-    <h2 class="sec-head reveal">Follow updates and join the discussion</h2>
-    <p class="lead reveal">The hosted product is open for public use. The source code is being progressively released, and feedback from real data-video use cases is welcome.</p>
+    <div class="eyebrow eyebrow--amber reveal">社区</div>
+    <h2 class="sec-head reveal">关注更新并加入讨论</h2>
+    <p class="lead reveal">在线产品已经开放使用。源代码正在逐步发布，我们也欢迎来自真实数据视频场景的反馈。</p>
 
     <div class="study-pair" style="align-items:stretch;">
       <div class="study-card reveal">
-        <div class="study-card-label">Try DataMagic</div>
+        <div class="study-card-label">在线试用</div>
         <div class="study-big" style="font-size:2rem;">Live</div>
-        <div class="study-desc">Use the online product to upload data, generate a narrated video, test Single Chart, and explore the template gallery.</div>
-        <p style="margin-top:1.2rem;"><a href="http://xyp.47.86.187.166.sslip.io/" class="btn btn-amber">Try It Now</a></p>
+        <div class="study-desc">使用在线产品上传数据、生成叙事视频、测试 Single Chart，并浏览模板库。</div>
+        <p style="margin-top:1.2rem;"><a href="http://xyp.47.86.187.166.sslip.io/" class="btn btn-amber">在线试用</a></p>
       </div>
       <div class="study-card reveal">
-        <div class="study-card-label">WeChat Community</div>
+        <div class="study-card-label">微信群</div>
         <div style="text-align:center;margin:1rem 0;">
           <img src="assets/wechat-community-qr.jpg" alt="DataMagic WeChat community QR code" style="width:170px;border-radius:8px;background:white;">
         </div>
-        <div class="study-desc">Scan to join the discussion group, share use cases, ask questions, and follow product updates.</div>
+        <div class="study-desc">扫码加入讨论群，分享使用场景、提出问题，并关注产品更新。</div>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p><strong>DataMagic: Transforming Tabular Data into Data Insight Video</strong></p>
+  <p><strong>DataMagic：把表格数据转成数据洞察视频</strong></p>
   <p>VLDB 2026 Demo &nbsp;&middot;&nbsp; HKUST (GZ) &amp; China Unicom</p>
   <hr class="footer-rule">
   <p><a href="https://datamagic-home.github.io/">datamagic-home.github.io</a></p>
