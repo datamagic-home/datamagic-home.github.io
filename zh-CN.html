@@ -123,11 +123,15 @@
     }
     .hero-inner { max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
 
+    .venue-badges {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem 1.1rem;
+      margin-bottom: 2.2rem;
+    }
     .venue-badge {
       display: inline-flex; align-items: center; gap: 0.6rem;
       font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--amber);
-      margin-bottom: 2.2rem;
+      padding-bottom: 0.3rem; border-bottom: 1px solid oklch(73% 0.21 200 / 0.5);
     }
     .venue-badge::before {
       content: ''; display: block;
@@ -384,6 +388,7 @@
     .prop-card p {
       font-size: 0.92rem; color: var(--ink-3); line-height: 1.7; margin: 0;
     }
+    .prop-card--wide { grid-column: 1 / -1; }
     code.inline {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8em; background: var(--surface);
@@ -399,7 +404,7 @@
       from { text-shadow: none; }
       to   { text-shadow: 0 0 22px oklch(65% 0.17 160 / 0.55); }
     }
-    .venue-badge {
+    .venue-badges {
       animation: data-pulse 3.5s ease-in-out infinite;
     }
     .flow-node.hi {
@@ -629,7 +634,9 @@
 <!-- ══ HERO ══ -->
 <section id="hero">
   <div class="hero-inner">
-    <div class="venue-badge">VLDB 2026 &thinsp;&middot;&thinsp; Demo Paper</div>
+    <div class="venue-badges" aria-label="论文成果">
+      <div class="venue-badge">IEEE VIS 2026</div>
+    </div>
     <h1 class="hero-title">
       <em>DataMagic</em>: 把<br>
       结构化数据变成<br>
@@ -641,7 +648,7 @@
         <div class="hero-names">
           上传表格，描述想讲清楚的数据故事，DataMagic 会通过 AI 规划、模板推荐、可编辑场景和数据绑定渲染生成动态数据视频。
         </div>
-        <div class="hero-affil">在线可用 &nbsp;&middot;&nbsp; VLDB 2026 Demo &nbsp;&middot;&nbsp; 源代码逐步开放中</div>
+        <div class="hero-affil">在线可用 &nbsp;&middot;&nbsp; IEEE VIS 2026 &nbsp;&middot;&nbsp; 源代码逐步开放中</div>
       </div>
       <div class="hero-btns">
         <a href="#video" class="btn btn-amber">&#9654;&thinsp; 演示视频</a>
@@ -1002,28 +1009,15 @@
 <section class="sec sec--surface" id="paper">
   <div class="sec-inner">
     <div class="eyebrow reveal">论文</div>
-    <h2 class="sec-head reveal">VLDB 2026 Demo Track 录用</h2>
-    <p class="lead reveal">论文介绍了系统设计、DVSpec 中间表示、Generate-then-Orchestrate 架构和评估结果。</p>
+    <h2 class="sec-head reveal">IEEE VIS 2026 录用</h2>
+    <p class="lead reveal">论文介绍了 DataMagic 的系统设计、DVSpec 中间表示、Generate-then-Orchestrate 架构和评估结果。</p>
 
     <div class="props-2">
-      <div class="prop-card reveal">
-        <h3>论文链接</h3>
-        <p><a href="https://arxiv.org/abs/2606.20388">DataMagic: Transforming Tabular Data into Data Insight Video</a><br>arXiv:2606.20388 · cs.HC</p>
-      </div>
-      <div class="prop-card reveal">
-        <h3>引用</h3>
-        <p>如果 DataMagic 对你的研究或工作有帮助，欢迎引用这篇 arXiv 论文。</p>
+      <div class="prop-card prop-card--wide reveal">
+        <h3>IEEE VIS 2026</h3>
+        <p><strong>长文</strong><br><em>DataMagic: Authoring Data Videos through Declarative Multi-Agent Orchestration</em><br>已录用，正式论文链接即将发布</p>
       </div>
     </div>
-    <div class="cite reveal">@misc{xie2026datamagictransformingtabulardata,
-  title={DataMagic: Transforming Tabular Data into Data Insight Video},
-  author={Yupeng Xie and Chen Ma and Zhenyang Wang and Liangwei Wang and Jiayi Zhu and Chuxuan Zeng and Zhouan Shen and Boyan Li and Yuyu Luo},
-  year={2026},
-  eprint={2606.20388},
-  archivePrefix={arXiv},
-  primaryClass={cs.HC},
-  url={https://arxiv.org/abs/2606.20388},
-}</div>
   </div>
 </section>
 
@@ -1056,7 +1050,7 @@
 
 <footer>
   <p><strong>DataMagic：把表格数据转成数据洞察视频</strong></p>
-  <p>VLDB 2026 Demo &nbsp;&middot;&nbsp; HKUST (GZ) &amp; China Unicom</p>
+  <p>IEEE VIS 2026 &nbsp;&middot;&nbsp; HKUST (GZ) &amp; China Unicom</p>
   <hr class="footer-rule">
   <p><a href="https://datamagic-home.github.io/">datamagic-home.github.io</a></p>
 </footer>
